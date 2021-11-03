@@ -1,5 +1,12 @@
 UIKit [Sketsa](https://github.com/qaharmdz/sketsa) - slim version
 
+### Usage
+
+```
+https://cdn.jsdelivr.net/gh/qaharmdz/playground/sketsa-slim/dist/css/uikit.sketsa-slim.min.css
+https://cdn.jsdelivr.net/gh/qaharmdz/playground/sketsa-slim/dist/css/uikit.sketsa-slim-rtl.min.css
+```
+
 ### No JS | CSS Components only:
 
 - Base
@@ -17,10 +24,3 @@ UIKit [Sketsa](https://github.com/qaharmdz/sketsa) - slim version
 - Width
 - Margin
 - Visibility
-
-### Usage
-
-```
-https://cdn.jsdelivr.net/gh/qaharmdz/playground/sketsa-slim/dist/css/uikit.sketsa-slim.min.css
-https://cdn.jsdelivr.net/gh/qaharmdz/playground/sketsa-slim/dist/css/uikit.sketsa-slim-rtl.min.css
-```
