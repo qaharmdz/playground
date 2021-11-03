@@ -1,1 +1,1 @@
-# snippets
+## PlayGround collection
