@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snippets</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/css/jquery.dataTables.min.css" integrity="sha256-YY1izqyhIj4W3iyJOaGWOpXDSwrHWFL4Nfk+W0LyCHE=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/datatables@1.10.18/media/js/jquery.dataTables.min.js" integrity="sha256-3aHVku6TxTRUkkiibvwTz5k8wc7xuEr1QqTB+Oo5Q7I=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.typewatch@3.0.1/jquery.typewatch.min.js"></script>
+    <script src="assets/dataTables.columnFilter.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/styles/monokai-sublime.min.css" integrity="sha256-4MHFzY0va2jGQvk9H/oo+QcjJhz/YfF8Wf95yHtXasc=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.3.1/build/highlight.min.js" integrity="sha256-ACiuknPSzs3jBPs5Vmxs9LOfqJe75LfS6l7pRNjwsHk=" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-lightbox@2.1.0/dist/simpleLightbox.min.css" integrity="sha256-NRIlTETePaYNN5ZOB75nkv7IIcQC2mr4Q+mN/T8Y4ck=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/simple-lightbox@2.1.0/dist/simpleLightbox.min.js" integrity="sha256-1tyXmT1+SAOus10OmiTwOT7OtD3l9/8PDkN/GwWupOI=" crossorigin="anonymous"></script>
+
+    <script src="assets/script.js"></script>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>snippet<b>Stack</b></h1>
+    </div>
+
+    <div class="box-wrapper">
+        <table id="dataTable" class="table">
+            <thead>
+                <tr>
+                    <th style="width:125px">Groups</th>
+                    <th style="width:200px">Tags</th>
+                    <th>Snippets</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </thead>
+
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="footer"></div>
+
+    <datalist id="dataGroup"></datalist>
+    <datalist id="dataTags"></datalist>
+</div>
+
+</body>
+</html>
