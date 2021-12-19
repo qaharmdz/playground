@@ -29,4 +29,58 @@ class PlainMysqli
     {
         return $this->mysqli;
     }
+
+    /**
+     * Run query `as is`.
+     * **Important**: use escape(), never trus user input.
+     */
+    public function rawQuery(string $query): \mysqli_result|bool
+    {
+        return $this->mysqli->query($query);
+    }
+
+    public function escape($value)
+    {
+        return $this->mysqli->real_escape_string($value);
+    }
+
+    /**
+     * Execute prepared statement query.
+     *
+     * @param  string $query
+     * @param  array  $params
+     * @param  string $types  s,i,d,b
+     *
+     * @return \mysql_stmt|bool  Returns \mysqli_stmt on success or false on failure.
+     */
+    public function query(string $query, array $params = [], string $types = ''): \mysqli_stmt|\mysqli_result|bool
+    {
+        if (!$params) {
+            return $this->rawQuery($query);
+        }
+
+        if (!$types) {
+            $types = str_repeat('s', count($params));
+        }
+
+        $statement = $this->mysqli->prepare($query);
+        $statement->bind_param($types, ...$params);
+        $status = $statement->execute();
+
+        return $status ? $statement : $status;
+    }
+
+    /**
+     * "select" query helper return \mysqli_result
+     */
+    public function select(string $query, array $params = [], string $types = ''): \mysqli_result|bool
+    {
+        $statement = $this->query($query, $params, $types);
+
+        if ($statement instanceof \mysqli_stmt) {
+            return $statement->get_result();
+        }
+
+        return $statement;
+    }
 }
