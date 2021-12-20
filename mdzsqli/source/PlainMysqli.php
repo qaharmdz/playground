@@ -71,16 +71,23 @@ class PlainMysqli
     /**
      * "select" query helper return \mysqli_result
      *
-     * @return \mysqli_result|bool
+     * @return \stdClass    num_rows, rows, row
      */
-    public function select(string $query, array $params = [], string $types = '')
+    public function select(string $query, array $params = [], string $types = ''): \stdClass
     {
-        $statement = $this->query($query, $params, $types);
+        $statement = $stmt_result = $this->query($query, $params, $types);
 
         if ($statement instanceof \mysqli_stmt) {
-            return $statement->get_result();
+            $stmt_result = $statement->get_result();
         }
 
-        return $statement;
+        $result = new \stdClass();
+        $result->num_rows = (int)$stmt_result->num_rows;
+        $result->rows     = $stmt_result->fetch_all(MYSQLI_ASSOC);
+        $result->row      = $result->rows[0] ?? [];
+
+        $stmt_result->close();
+
+        return $result;
     }
 }
