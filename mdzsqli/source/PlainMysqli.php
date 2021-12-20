@@ -36,7 +36,7 @@ class PlainMysqli
      *
      * @return \mysqli_result|bool
      */
-    public function rawQuery(string $query)
+    public function raw(string $query)
     {
         return $this->mysqli->query($query);
     }
