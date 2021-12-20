@@ -33,8 +33,10 @@ class PlainMysqli
     /**
      * Run query `as is`.
      * **Important**: use escape(), never trus user input.
+     *
+     * @return \mysqli_result|bool
      */
-    public function rawQuery(string $query): \mysqli_result|bool
+    public function rawQuery(string $query)
     {
         return $this->mysqli->query($query);
     }
@@ -51,9 +53,9 @@ class PlainMysqli
      * @param  array  $params
      * @param  string $types  s,i,d,b
      *
-     * @return \mysql_stmt|bool  Returns \mysqli_stmt on success or false on failure.
+     * @return \mysqli_stmt|\mysqli_result|bool
      */
-    public function query(string $query, array $params = [], string $types = ''): \mysqli_stmt|\mysqli_result|bool
+    public function query(string $query, array $params = [], string $types = '')
     {
         if (!$params) {
             return $this->rawQuery($query);
@@ -72,8 +74,10 @@ class PlainMysqli
 
     /**
      * "select" query helper return \mysqli_result
+     *
+     * @return \mysqli_result|bool
      */
-    public function select(string $query, array $params = [], string $types = ''): \mysqli_result|bool
+    public function select(string $query, array $params = [], string $types = '')
     {
         $statement = $this->query($query, $params, $types);
 
