@@ -53,14 +53,10 @@ class PlainMysqli
      * @param  array  $params
      * @param  string $types  s,i,d,b
      *
-     * @return \mysqli_result|\mysqli_stmt|bool
+     * @return \mysqli_stmt|bool
      */
     public function query(string $query, array $params = [], string $types = '')
     {
-        if (!$params) {
-            return $this->rawQuery($query);
-        }
-
         if (!$types) {
             $types = str_repeat('s', count($params));
         }
