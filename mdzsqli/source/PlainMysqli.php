@@ -53,7 +53,7 @@ class PlainMysqli
      * @param  array  $params
      * @param  string $types  s,i,d,b
      *
-     * @return \mysqli_stmt|\mysqli_result|bool
+     * @return \mysqli_result|\mysqli_stmt|bool
      */
     public function query(string $query, array $params = [], string $types = '')
     {
@@ -67,9 +67,9 @@ class PlainMysqli
 
         $statement = $this->mysqli->prepare($query);
         $statement->bind_param($types, ...$params);
-        $status = $statement->execute();
+        $statement->execute();
 
-        return $status ? $statement : $status;
+        return $statement;
     }
 
     /**
