@@ -6,8 +6,14 @@ namespace Mdz;
 
 class PlainMysqli
 {
+    /**
+     * @var string
+     */
     public const VERSION = '1.0.0-a.1';
 
+    /**
+     * @var \mysqli
+     */
     protected $mysqli;
 
     public function __construct(
@@ -25,7 +31,7 @@ class PlainMysqli
         $this->mysqli->set_charset($charset);
     }
 
-    public function connection()
+    public function connection(): \mysqli
     {
         return $this->mysqli;
     }
@@ -43,7 +49,7 @@ class PlainMysqli
         return $this->mysqli->query($query);
     }
 
-    public function escape($value)
+    public function escape($value): string
     {
         return $this->mysqli->real_escape_string($value);
     }
