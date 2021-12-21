@@ -79,6 +79,22 @@ class PlainMysqli
     }
 
     /**
+     * Execute multiple sql queries.
+     *
+     * @param  string $queries
+     */
+    public function multiQuery(string $queries)
+    {
+        $this->mysqli->multi_query($queries);
+
+        do {
+            if ($result = $this->mysqli->store_result()) {
+                $result->free_result();
+            }
+        } while ($this->mysqli->next_result());
+    }
+
+    /**
      * Select query helper
      *
      * @param  string $query
