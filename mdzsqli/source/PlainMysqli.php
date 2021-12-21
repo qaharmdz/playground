@@ -46,7 +46,7 @@ class PlainMysqli
      */
     public function raw(string $query)
     {
-        return $this->mysqli->query($query);
+        return $this->mysqli->query($query, MYSQLI_STORE_RESULT);
     }
 
     public function escape($value): string
