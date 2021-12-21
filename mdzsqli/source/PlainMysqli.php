@@ -34,6 +34,8 @@ class PlainMysqli
      * Run query `as is`.
      * **Important**: use escape(), never trus user input.
      *
+     * @link https://www.php.net/manual/en/class.mysqli-result.php
+     *
      * @return \mysqli_result|bool
      */
     public function raw(string $query)
@@ -53,7 +55,9 @@ class PlainMysqli
      * @param  array  $params
      * @param  string $types  s,i,d,b
      *
-     * @return \mysqli_stmt|bool
+     * @link https://www.php.net/manual/en/class.mysqli-stmt.php
+     *
+     * @return \mysqli_result|\mysqli_stmt|bool
      */
     public function query(string $query, array $params = [], string $types = '')
     {
@@ -69,7 +73,11 @@ class PlainMysqli
     }
 
     /**
-     * "select" query helper return \mysqli_result
+     * Select query helper
+     *
+     * @param  string $query
+     * @param  array  $params
+     * @param  string $types  s,i,d,b
      *
      * @return \stdClass    num_rows, rows, row
      */
