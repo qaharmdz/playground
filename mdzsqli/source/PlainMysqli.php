@@ -104,4 +104,53 @@ class PlainMysqli
 
         return $result;
     }
+
+    /**
+     * Get information about the most recently executed query.
+     *
+     * @link https://www.php.net/manual/en/mysqli.info.php#mysqli.info.description
+     *
+     * @return array
+     */
+    public function info(): array
+    {
+        $result = [];
+
+        if ($info = $this->mysqli->info) {
+            preg_match_all('/(\w[^:]+): (\d+)/', strtolower($info), $matches);
+            $result = array_combine($matches[1], $matches[2]);
+        }
+
+        return $result;
+    }
+
+    /**
+     * Get latest primary key inserted.
+     *
+     * @return int|string
+     */
+    public function insertId(): int
+    {
+        return (int)$this->mysqli->insert_id;
+    }
+
+    /**
+     * Get the affected rows in the previous query.
+     *
+     * @return int  The number of rows affected or retrieved
+     */
+    public function affectedRows(): int
+    {
+        return (int)$this->mysqli->affected_rows;
+    }
+
+    /**
+     * Check database connection.
+     *
+     * @return bool
+     */
+    public function ping(): bool
+    {
+        return $this->mysqli->ping();
+    }
 }
