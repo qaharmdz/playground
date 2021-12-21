@@ -83,10 +83,10 @@ class PlainMysqli
      */
     public function select(string $query, array $params = [], string $types = ''): \stdClass
     {
-        $statement = $stmt_result = $this->query($query, $params, $types);
+        $stmt_result = $params ? $this->query($query, $params, $types) : $this->raw($query);
 
-        if ($statement instanceof \mysqli_stmt) {
-            $stmt_result = $statement->get_result();
+        if ($stmt_result instanceof \mysqli_stmt) {
+            $stmt_result = $stmt_result->get_result();
         }
 
         $result = new \stdClass();
