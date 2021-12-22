@@ -38,6 +38,9 @@ class PlainMysqli
         }
     }
 
+    /**
+     * @return \mysqli
+     */
     public function connection(): \mysqli
     {
         return $this->mysqli;
@@ -74,7 +77,7 @@ class PlainMysqli
      */
     public function query(string $query, array $params = [], string $types = '')
     {
-        if (!$types) {
+        if ($types === []) {
             $types = str_repeat('s', count($params));
         }
 
