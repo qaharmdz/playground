@@ -16,6 +16,11 @@ class PlainMysqli
      */
     protected $mysqli;
 
+    /**
+     * @var array
+     */
+    private $config = [];
+
     public function __construct(
         string $host,
         string $username,
@@ -36,6 +41,18 @@ class PlainMysqli
         } catch (\mysqli_sql_exception $e) {
             throw new \mysqli_sql_exception($e->getMessage(), $e->getCode());
         }
+
+        $this->configuration([]);
+    }
+
+    public function configuration(array $rules)
+    {
+        $this->config = array_replace_recursive(
+            [
+                'query_fallback' => true
+            ],
+            $rules
+        );
     }
 
     /**
@@ -77,6 +94,10 @@ class PlainMysqli
      */
     public function query(string $query, array $params = [], string $types = '')
     {
+        if ($params === [] && $this->config['query_fallback']) {
+            return $this->raw($query);
+        }
+
         if ($types === []) {
             $types = str_repeat('s', count($params));
         }
