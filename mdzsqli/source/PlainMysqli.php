@@ -142,7 +142,9 @@ class PlainMysqli
         }
 
         $tokenType = array_map(
-            function($type) { return $type ?: 's'; },
+            function ($type) {
+                return $type ?: 's';
+            },
             $tokenType
         );
 
