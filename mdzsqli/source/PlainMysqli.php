@@ -95,12 +95,10 @@ class PlainMysqli
         }
 
         if ($types === '') {
-            $paramNumber = count($params);
-
-            if ($results = $this->parseParamType($query, $paramNumber)) {
+            if ($results = $this->parseParamType($query)) {
                 list($query, $types) = $results;
             } else {
-                $types = str_repeat('s', $paramNumber);
+                $types = str_repeat('s', count($params));
             }
         }
 
@@ -131,23 +129,98 @@ class PlainMysqli
      * Parameter type hint.
      *
      * @param  string $query
-     * @param  int    $paramNumber
      *
      * @return array|false
      */
-    public function parseParamType(string $query, int $paramNumber)
+    public function parseParamType(string $query)
     {
-        preg_match_all('/\?([sidb])/', $query, $matches);
+        preg_match_all('/\?([sidb])?/', $query, $matches);
         list($tokens, $tokenType) = $matches;
 
         if (!$tokens) {
             return false;
         }
 
+        $tokenType = array_map(
+            function($type) { return $type ?: 's'; },
+            $tokenType
+        );
+
         $query = strtr($query, array_fill_keys($tokens, '?'));
-        $types = count($tokenType) === $paramNumber ? implode('', $tokenType) : str_repeat('s', $paramNumber);
+        $types = implode('', $tokenType);
 
         return [$query, $types];
+    }
+
+    public function parseParamName(string $query, array $params = [])
+    {
+        if ($params === [] || (array_keys($params) === range(0, count($params) - 1))) {
+            return false;
+        }
+
+        preg_match_all('/:(\w{2,}+)(\?[sidb])?/', $query, $matches);
+        list($tokens, $tokenParam, $tokenType) = $matches;
+
+        if (!$tokens) {
+            return false;
+        }
+        if (count(array_unique($tokenParam)) !== count(array_intersect_key(array_flip($tokenParam), $params))) {
+            throw new \InvalidArgumentException(sprintf('The number of given parameters not match named-parameter for query "' . $query . '".'));
+        }
+
+        $types  = '';
+        $parameters = [];
+        $placeholders = [];
+
+        foreach ($tokenParam as $i => $name) {
+            $_type = $tokenType[$i] ?: '?s';
+            $_paramsVal = $params[$name];
+
+            if (is_array($_paramsVal)) {
+                $_count = count($_paramsVal);
+
+                switch ($_type) {
+                    case '?i':
+                        $_paramsVal = array_map('intval', $_paramsVal);
+                        break;
+                    case '?d':
+                        $_paramsVal = array_map('floatval', $_paramsVal);
+                        break;
+                    default:
+                        $_paramsVal = array_map('strval', $_paramsVal);
+                        break;
+                }
+
+                $types .= str_repeat($_type, $_count);
+                $parameters = array_merge($parameters, $_paramsVal);
+                $placeholders[$tokens[$i]] =  '?' . str_repeat(',?', $_count - 1);
+            } else {
+                $types .= $_type;
+                $placeholders[$tokens[$i]] = '?';
+
+                switch ($_type) {
+                    case '?i':
+                        $parameters[] = intval($_paramsVal);
+                        break;
+                    case '?d':
+                        $parameters[] = floatval($_paramsVal);
+                        break;
+                    default:
+                        $parameters[] = strval($_paramsVal);
+                        break;
+                }
+            }
+        }
+
+        $query = strtr($query, $placeholders);
+        $types = str_replace('?', '', $types);
+
+        // Variable
+        preg_match_all('/{\w+}/', $query, $matches);
+        $vars  = array_intersect_key($params, array_flip($matches[0]));
+        $query = strtr($query, $vars);
+
+        return [$query, $parameters, $types];
     }
 
     /**
