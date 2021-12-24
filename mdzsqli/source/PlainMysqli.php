@@ -98,8 +98,14 @@ class PlainMysqli
             return $this->raw($query);
         }
 
-        if ($types === []) {
-            $types = str_repeat('s', count($params));
+        if ($types === '') {
+            $paramNumber = count($params);
+
+            if ($results = $this->parseParamType($query, $paramNumber)) {
+                list($query, $types) = $results;
+            } else {
+                $types = str_repeat('s', $paramNumber);
+            }
         }
 
         $statement = $this->mysqli->prepare($query);
@@ -123,6 +129,29 @@ class PlainMysqli
                 $result->free_result();
             }
         } while ($this->mysqli->next_result());
+    }
+
+    /**
+     * Parameter type hint.
+     *
+     * @param  string $query
+     * @param  int    $paramNumber
+     *
+     * @return array|false
+     */
+    public function parseParamType(string $query, int $paramNumber)
+    {
+        preg_match_all('/\?([sidb])/', $query, $matches);
+        list($tokens, $tokenType) = $matches;
+
+        if (!$tokens) {
+            return false;
+        }
+
+        $query = strtr($query, array_fill_keys($tokens, '?'));
+        $types = count($tokenType) === $paramNumber ? implode('', $tokenType) : str_repeat('s', $paramNumber);
+
+        return [$query, $types];
     }
 
     /**
