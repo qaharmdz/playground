@@ -106,6 +106,10 @@ class PlainMysqli
         $statement->bind_param($types, ...$params);
         $statement->execute();
 
+        if ($statement->result_metadata() instanceof \mysqli_result) {
+            return $statement->get_result();
+        }
+
         return $statement;
     }
 
