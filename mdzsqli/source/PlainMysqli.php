@@ -101,7 +101,11 @@ class PlainMysqli
         }
 
         if ($types === '') {
-            list($query, $types) = $this->parseParamType($query);
+            if ($results = $this->parseParamName($query, $params)) {
+                list($query, $params, $types) = $results;
+            } else {
+                list($query, $types) = $this->parseParamType($query);
+            }
         }
 
         $statement = $this->mysqli->prepare($query);
