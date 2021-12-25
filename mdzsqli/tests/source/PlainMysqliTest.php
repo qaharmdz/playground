@@ -8,9 +8,9 @@ use PHPUnit\Framework\TestCase;
 
 class PlainMysqliTest extends TestCase
 {
-    protected $db;
+    protected static $db;
 
-    protected function setUp(): void
+    public static function setUpBeforeClass(): void
     {
         if (!is_file('./tests/config.php')) {
             exit('Database configuration file required!');
@@ -18,26 +18,31 @@ class PlainMysqliTest extends TestCase
 
         $config = include './tests/config.php';
 
-        $this->db = new \Mdz\PlainMysqli(
+        self::$db = new \Mdz\PlainMysqli(
             $config['host'],
             $config['username'],
             $config['password'],
             $config['database'],
         );
 
-        // Recreate DB table per test
         $schema = file_get_contents('./tests/schema.sql');
-        $this->db->multiQuery($schema);
+        self::$db->multiQuery($schema);
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        self::$db = null;
     }
 
     public function testInstance()
     {
-        $this->assertInstanceOf('Mdz\PlainMysqli', $this->db);
-        $this->assertInstanceOf(\mysqli::class, $this->db->connection());
+        $this->assertInstanceOf('Mdz\PlainMysqli', self::$db);
+        $this->assertInstanceOf(\mysqli::class, self::$db->connection());
     }
 
     public function testRaw()
     {
-        $this->assertInstanceOf(\mysqli_result::class, $this->db->raw("SELECT now()"));
+        $this->assertInstanceOf(\mysqli_result::class, self::$db->raw("SELECT now()"));
+    }
     }
 }
