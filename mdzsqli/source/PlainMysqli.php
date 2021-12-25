@@ -236,33 +236,6 @@ class PlainMysqli
     }
 
     /**
-     * Select query helper
-     *
-     * @param  string $query
-     * @param  array  $params
-     * @param  string $types  s,i,d,b
-     *
-     * @return \stdClass    num_rows, rows, row
-     */
-    public function select(string $query, array $params = [], string $types = ''): \stdClass
-    {
-        $stmt_result = $params ? $this->query($query, $params, $types) : $this->raw($query);
-
-        if ($stmt_result instanceof \mysqli_stmt) {
-            $stmt_result = $stmt_result->get_result();
-        }
-
-        $result = new \stdClass();
-        $result->num_rows = (int)$stmt_result->num_rows;
-        $result->rows     = $stmt_result->fetch_all(MYSQLI_ASSOC);
-        $result->row      = $result->rows[0] ?? [];
-
-        $stmt_result->close();
-
-        return $result;
-    }
-
-    /**
      * Get information about the most recently executed query.
      *
      * @link https://www.php.net/manual/en/mysqli.info.php#mysqli.info.description
@@ -309,5 +282,35 @@ class PlainMysqli
     public function ping(): bool
     {
         return $this->mysqli->ping();
+    }
+
+    // Helper
+    // ================================================
+
+    /**
+     * Select query helper
+     *
+     * @param  string $query
+     * @param  array  $params
+     * @param  string $types  s,i,d,b
+     *
+     * @return \stdClass    num_rows, rows, row
+     */
+    public function select(string $query, array $params = [], string $types = ''): \stdClass
+    {
+        $stmt_result = $params ? $this->query($query, $params, $types) : $this->raw($query);
+
+        if ($stmt_result instanceof \mysqli_stmt) {
+            $stmt_result = $stmt_result->get_result();
+        }
+
+        $result = new \stdClass();
+        $result->num_rows = (int)$stmt_result->num_rows;
+        $result->rows     = $stmt_result->fetch_all(MYSQLI_ASSOC);
+        $result->row      = $result->rows[0] ?? [];
+
+        $stmt_result->close();
+
+        return $result;
     }
 }
