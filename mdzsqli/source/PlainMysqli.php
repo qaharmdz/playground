@@ -72,9 +72,15 @@ class PlainMysqli
         return $this->mysqli->query($query, MYSQLI_STORE_RESULT);
     }
 
-    public function escape($value): string
+    public function escape(string $value, string $extra = ''): string
     {
-        return $this->mysqli->real_escape_string($value);
+        $escaped = $this->mysqli->real_escape_string($value);
+
+        if ($extra !== '') {
+            $escaped = addcslashes($escaped, $extra);
+        }
+
+        return $escaped;
     }
 
     /**
