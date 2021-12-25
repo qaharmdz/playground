@@ -142,7 +142,7 @@ class PlainMysqli
      *
      * @return array|false
      */
-    public function parseParamType(string $query)
+    protected function parseParamType(string $query)
     {
         preg_match_all('/\?([sidb])?/', $query, $matches);
         list($tokens, $tokenType) = $matches;
@@ -164,9 +164,9 @@ class PlainMysqli
         return [$query, $types];
     }
 
-    public function parseParamName(string $query, array $params = [])
+    protected function parseParamName(string $query, array $params = [])
     {
-        if ($params === [] || (array_keys($params) === range(0, count($params) - 1))) {
+        if (array_keys($params) === range(0, count($params) - 1)) {
             return false;
         }
 
