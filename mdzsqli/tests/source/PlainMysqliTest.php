@@ -44,5 +44,102 @@ class PlainMysqliTest extends TestCase
     {
         $this->assertInstanceOf(\mysqli_result::class, self::$db->raw("SELECT now()"));
     }
+
+    public function testEscape()
+    {
+        $this->assertEquals(
+            'foo\\\nbar\"baz%bat_for',
+            self::$db->escape('foo\nbar"baz%bat_for')
+        );
+
+        // Extra escape: _ and %
+        $this->assertEquals(
+            'foo\\\nbar\"baz\%bat\_for',
+            self::$db->escape('foo\nbar"baz%bat_for', '_%')
+        );
+    }
+
+    public function testQueryRaw()
+    {
+        $result = self::$db->query("SELECT now() AS `now`")->fetch_assoc();
+
+        $this->assertTrue(!empty($result['now']));
+    }
+
+    public function testQuery()
+    {
+        $result = self::$db->query(
+            "INSERT INTO `post` SET `title` = ?s, `content` = ?s, `status` = ?i",
+            ['The Second Post', 'The second post description. ', 1]
+        );
+
+        $this->assertInstanceOf(\mysqli_stmt::class, $result);
+
+        $this->assertTrue(self::$db->insertId() > 1);
+        $this->assertTrue(self::$db->affectedRows() === 1);
+    }
+
+    public function testQueryResult()
+    {
+        $result = self::$db->query(
+            "SELECT * FROM `post` WHERE `title` LIKE ?s AND `status` = ?i",
+            ['%first%', 1]
+        )->fetch_assoc();
+
+        $this->assertEquals('The First Post', $result['title']);
+    }
+
+    /**
+     * @depends testQuery
+     */
+    public function testQueryNamedParameter()
+    {
+        $result = self::$db->query(
+            "SELECT * FROM `post` WHERE `post_id` IN (:post_ids?i) AND `title` LIKE :title?s AND `status` = :status?i ORDER BY {sort_col} DESC",
+            [
+                'post_ids'   => [1, 2, 3],
+                'title'      => '%the%',
+                'status'     => 1,
+                '{sort_col}' => 'post_id'
+            ]
+        )->fetch_assoc();
+
+        $this->assertEquals('The Second Post', $result['title']);
+    }
+
+    /**
+     * Pass parameters but query not have "?" placeholders.
+     */
+    public function testQueryInvalidParamPlaceholder()
+    {
+        $this->expectException(\TypeError::class);
+
+        $result = self::$db->query("SELECT now() AS `now`", [1])->fetch_assoc();
+    }
+
+    public function testMultiQuery()
+    {
+        $this->assertNull(self::$db->multiQuery("
+            SELECT @@character_set_database AS charset, @@collation_database AS collation;
+            SELECT now();
+        "));
+    }
+
+    public function testInfo()
+    {
+        self::$db->query(
+            "INSERT INTO `post` (`title`, `content`, `status`) VALUES (?s, ?s, ?i)",
+            ['The Third Post', 'The third post description. ', 1]
+        );
+        $this->assertEquals([
+            'records'    => '1',
+            'duplicates' => '0',
+            'warnings'   => '0',
+        ], self::$db->info());
+    }
+
+    public function testPing()
+    {
+        $this->assertTrue(self::$db->ping());
     }
 }
