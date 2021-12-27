@@ -128,11 +128,15 @@ class PlainMysqliTest extends TestCase
     public function testInfo()
     {
         self::$db->query(
-            "INSERT INTO `post` (`title`, `content`, `status`) VALUES (?s, ?s, ?i)",
-            ['The Third Post', 'The third post description. ', 1]
+            "INSERT INTO `post` (`title`, `content`, `status`) VALUES (?s, ?s, ?i), (?s, ?s, ?i)",
+            [
+                'The Third Post', 'The third post description. ', 1,
+                'The Fourth Post', 'The fourth post description. ', 0
+            ]
         );
+
         $this->assertEquals([
-            'records'    => '1',
+            'records'    => '2',
             'duplicates' => '0',
             'warnings'   => '0',
         ], self::$db->info());
