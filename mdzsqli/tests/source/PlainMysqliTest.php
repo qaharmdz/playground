@@ -146,4 +146,16 @@ class PlainMysqliTest extends TestCase
     {
         $this->assertTrue(self::$db->ping());
     }
+
+    public function testSelect()
+    {
+        $result = self::$db->select(
+            'SELECT * FROM `post` WHERE `status` = ?i',
+            [1]
+        );
+
+        $this->assertEquals($result->num_rows, count($result->rows));
+        $this->assertArrayHasKey('title', $result->rows[0]);
+        $this->assertArrayHasKey('title', $result->row);
+    }
 }
