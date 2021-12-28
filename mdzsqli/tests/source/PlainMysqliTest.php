@@ -158,4 +158,19 @@ class PlainMysqliTest extends TestCase
         $this->assertArrayHasKey('title', $result->rows[0]);
         $this->assertArrayHasKey('title', $result->row);
     }
+
+    public function testInsert()
+    {
+        self::$db->insert('post', [
+            'title'   => 'Test Insert',
+            'content' => 'Test insert content',
+            'status' => 0,
+        ]);
+
+        $this->assertTrue(self::$db->insertId() > 1);
+    }
+
+    /**
+     * @depends testQuery
+     */
 }

@@ -309,4 +309,25 @@ class PlainMysqli
 
         return $result;
     }
+
+    /**
+     * Insert query helper
+     *
+     * @param  string $table
+     * @param  array  $data
+     *
+     * @return \mysqli_stmt|bool
+     */
+    public function insert(string $table, array $data)
+    {
+        $sets   = [];
+        $params = [];
+
+        foreach ($data as $key => $value) {
+            $sets[]   = "`" . $key . "` = ?";
+            $params[] = is_array($value) ? json_encode($value) : $value;
+        }
+
+        return $this->query("INSERT INTO `" . $table . "` SET " . implode(', ', $sets), $params);
+    }
 }
