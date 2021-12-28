@@ -288,7 +288,7 @@ class PlainMysqli
     // ================================================
 
     /**
-     * Select query helper
+     * SELECT query helper
      *
      * @param  string $query
      * @param  array  $params
@@ -311,7 +311,7 @@ class PlainMysqli
     }
 
     /**
-     * Insert query helper
+     * INSERT query helper
      *
      * @param  string $table
      * @param  array  $data
@@ -322,12 +322,13 @@ class PlainMysqli
     {
         $sets   = [];
         $params = [];
+        $types  = str_repeat('s', count($data));
 
         foreach ($data as $key => $value) {
             $sets[]   = "`" . $key . "` = ?";
             $params[] = is_array($value) ? json_encode($value) : $value;
         }
 
-        return $this->query("INSERT INTO `" . $table . "` SET " . implode(', ', $sets), $params);
+        return $this->query("INSERT INTO `" . $table . "` SET " . implode(', ', $sets), $params, $types);
     }
 }
