@@ -329,7 +329,11 @@ class PlainMysqli
             $params[] = is_array($value) ? json_encode($value) : $value;
         }
 
-        return $this->query("INSERT INTO `" . $table . "` SET " . implode(', ', $sets), $params, $types);
+        return $this->query(
+            "INSERT INTO `" . $table . "` SET " . implode(', ', $sets),
+            $params,
+            $types
+        );
     }
 
     /**
@@ -365,6 +369,10 @@ class PlainMysqli
             }
         }
 
-        return $this->query("UPDATE `" . $table . "` SET " . implode(', ', $sets) . " WHERE " . implode(' AND ', $wheres), $params, $types);
+        return $this->query(
+            "UPDATE `" . $table . "` SET " . implode(', ', $sets) . "WHERE " . implode(' AND ', $wheres),
+            $params,
+            $types
+        );
     }
 }
