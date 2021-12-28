@@ -331,4 +331,40 @@ class PlainMysqli
 
         return $this->query("INSERT INTO `" . $table . "` SET " . implode(', ', $sets), $params, $types);
     }
+
+    /**
+     * UPDATE query helper
+     *
+     * @param  string $table
+     * @param  array  $data
+     * @param  array  $where
+     *
+     * @return \mysqli_stmt|bool
+     */
+    public function update(string $table, array $data, array $where)
+    {
+        $sets   = [];
+        $wheres = [];
+        $params = [];
+        $types  = str_repeat('s', count($data));
+
+        foreach ($data as $key => $value) {
+            $sets[]   = "`" . $key . "` = ?";
+            $params[] = is_array($value) ? json_encode($value) : $value;
+        }
+
+        foreach ($where as $key => $value) {
+            if (is_array($value)) {
+                $wheres[] = "`" . $key . "` IN (" . '?' . str_repeat(',?', count($value) - 1) . ")";
+                $params   = array_merge($params, $value);
+                $types   .= str_repeat('s', count($value));
+            } else {
+                $wheres[] = "`" . $key . "` = ?";
+                $params[] = $value;
+                $types   .= 's';
+            }
+        }
+
+        return $this->query("UPDATE `" . $table . "` SET " . implode(', ', $sets) . " WHERE " . implode(' AND ', $wheres), $params, $types);
+    }
 }

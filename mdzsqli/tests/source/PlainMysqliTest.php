@@ -161,16 +161,53 @@ class PlainMysqliTest extends TestCase
 
     public function testInsert()
     {
-        self::$db->insert('post', [
-            'title'   => 'Test Insert',
-            'content' => 'Test insert content',
-            'status' => 0,
-        ]);
+        self::$db->insert(
+            'post',
+            [
+                'title'   => 'Test Insert',
+                'content' => 'Test insert content',
+                'status'  => 0,
+            ]
+        );
 
         $this->assertTrue(self::$db->insertId() > 1);
     }
 
     /**
-     * @depends testQuery
+     * @depends testInsert
      */
+    public function testUpdate()
+    {
+        $statement = self::$db->update(
+            'post',
+            [
+                'title'  => 'Test Update',
+                'status' => 1,
+            ],
+            [
+                'post_id' => 5
+            ]
+        );
+
+        $this->assertEquals(1, self::$db->affectedRows());
+    }
+
+    /**
+     * @depends testInsert
+     */
+    public function testUpdateWhereArray()
+    {
+        $statement = self::$db->update(
+            'post',
+            [
+                'content'  => 'Test update content',
+                'status' => 0,
+            ],
+            [
+                'post_id' => [2, 3, 5]
+            ]
+        );
+
+        $this->assertEquals(3, self::$db->affectedRows());
+    }
 }
