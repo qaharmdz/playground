@@ -300,10 +300,6 @@ class PlainMysqli
     {
         $stmt_result = $params ? $this->query($query, $params, $types) : $this->raw($query);
 
-        if ($stmt_result instanceof \mysqli_stmt) {
-            $stmt_result = $stmt_result->get_result();
-        }
-
         $result = new \stdClass();
         $result->num_rows = (int)$stmt_result->num_rows;
         $result->rows     = $stmt_result->fetch_all(MYSQLI_ASSOC);
