@@ -38,17 +38,22 @@ class PlainMysqli
         $this->mysqli->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
         $this->mysqli->query('SET NAMES utf8mb4 COLLATE utf8mb4_unicode_520_ci');
 
-        $this->configuration([]);
+        $this->setConfig();
     }
 
-    public function configuration(array $rules)
+    public function setConfig(array $configuration = [])
     {
         $this->config = array_replace_recursive(
             [
                 'query_fallback' => true
             ],
-            $rules
+            $configuration
         );
+    }
+
+    public function getConfig($key, $default = null)
+    {
+        return $this->config[$key] ?? $default;
     }
 
     /**
@@ -96,7 +101,7 @@ class PlainMysqli
      */
     public function query(string $query, array $params = [], string $types = '')
     {
-        if ($params === [] && $this->config['query_fallback']) {
+        if ($params === [] && $this->getConfig('query_fallback')) {
             return $this->raw($query);
         }
 
@@ -370,7 +375,7 @@ class PlainMysqli
         }
 
         return $this->query(
-            "UPDATE `" . $table . "` SET " . implode(', ', $sets) . "WHERE " . implode(' AND ', $wheres),
+            "UPDATE `" . $table . "` SET " . implode(', ', $sets) . " WHERE " . implode(' AND ', $wheres),
             $params,
             $types
         );
