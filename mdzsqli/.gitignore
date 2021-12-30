@@ -1,1 +1,6 @@
+config.php
+phpunit.xml
+.phpunit.result.cache
+
+tests/_report/*
 vendor/
