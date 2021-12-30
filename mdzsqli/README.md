@@ -1,1 +1,0 @@
-An opiniated MySQLi wrapper
