@@ -1,0 +1,42 @@
+{
+    "name": "qaharmdz/mysqli",
+    "description": "A plain and opiniated MySQLi wrapper",
+    "type": "library",
+    "keywords": ["php","mysqli"],
+    "license": "MIT",
+    "authors": [
+        {
+          "name": "Mudzakkir",
+          "email": "hello@mdzstack.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4 || ^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mdz\\": "source"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mdz\\Test\\": "tests/source"
+        }
+    },
+    "scripts": {
+        "test": [
+            "php vendor/bin/phpunit",
+            "php -r \"copy('tests/coverage-report.css', 'tests/_report/_css/custom.css');\""
+        ],
+        "test-chunk": "php vendor/bin/phpunit --no-coverage --group chunk"
+    },
+    "prefer-stable": true,
+    "config": {
+        "vendor-dir": "vendor",
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    }
+}
