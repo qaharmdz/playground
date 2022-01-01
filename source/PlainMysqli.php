@@ -31,11 +31,11 @@ class PlainMysqli
         int $port = 3306,
         string $socket = null
     ) {
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+        mysqli_report(\MYSQLI_REPORT_ERROR | \MYSQLI_REPORT_STRICT);
 
         $this->mysqli = new \mysqli($host, $username, $password, $database, $port, $socket);
         $this->mysqli->set_charset($charset);
-        $this->mysqli->options(MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
+        $this->mysqli->options(\MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
         $this->mysqli->query('SET NAMES utf8mb4 COLLATE utf8mb4_unicode_520_ci');
 
         $this->setConfig();
@@ -74,7 +74,7 @@ class PlainMysqli
      */
     public function raw(string $query)
     {
-        return $this->mysqli->query($query, MYSQLI_STORE_RESULT);
+        return $this->mysqli->query($query, \MYSQLI_STORE_RESULT);
     }
 
     public function escape(string $value, string $extra = ''): string
@@ -307,7 +307,7 @@ class PlainMysqli
 
         $result = new \stdClass();
         $result->num_rows = (int)$stmt_result->num_rows;
-        $result->rows     = $stmt_result->fetch_all(MYSQLI_ASSOC);
+        $result->rows     = $stmt_result->fetch_all(\MYSQLI_ASSOC);
         $result->row      = $result->rows[0] ?? [];
 
         $stmt_result->close();
