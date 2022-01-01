@@ -40,6 +40,20 @@ class PlainMysqliTest extends TestCase
         $this->assertInstanceOf(\mysqli::class, self::$db->connection());
     }
 
+    public function testConstruct()
+    {
+        $config = include './tests/config.php';
+
+        $db = new \Mdz\PlainMysqli(
+            $config['host'],
+            $config['username'],
+            $config['password'],
+            $config['database'],
+        );
+
+        $this->assertEquals($db, self::$db);
+    }
+
     public function testRaw()
     {
         $this->assertInstanceOf(\mysqli_result::class, self::$db->raw("SELECT now()"));
