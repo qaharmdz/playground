@@ -113,6 +113,11 @@ class PlainMysqli
             }
         }
 
+        // Validate sequential array parameter
+        if (array_keys($params) !== range(0, count($params) - 1)) {
+            return false;
+        }
+
         $statement = $this->mysqli->prepare($query);
         $statement->bind_param($types, ...$params);
         $statement->execute();
