@@ -149,7 +149,7 @@ class PlainMysqliTest extends TestCase
 
     public function testSelect()
     {
-        $result = self::$db->select(
+        $result = self::$db->get(
             'SELECT * FROM `post` WHERE `status` = ?i',
             [1]
         );
@@ -161,7 +161,7 @@ class PlainMysqliTest extends TestCase
 
     public function testInsert()
     {
-        self::$db->insert(
+        self::$db->add(
             'post',
             [
                 'title'   => 'Test Insert',
@@ -178,7 +178,7 @@ class PlainMysqliTest extends TestCase
      */
     public function testUpdate()
     {
-        $statement = self::$db->update(
+        $statement = self::$db->set(
             'post',
             [
                 'title'  => 'Test Update',
@@ -197,7 +197,7 @@ class PlainMysqliTest extends TestCase
      */
     public function testUpdateWhereArray()
     {
-        $statement = self::$db->update(
+        $statement = self::$db->set(
             'post',
             [
                 'content'  => 'Test update content',

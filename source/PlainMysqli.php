@@ -301,7 +301,7 @@ class PlainMysqli
      *
      * @return \stdClass    num_rows, rows, row
      */
-    public function select(string $query, array $params = [], string $types = ''): \stdClass
+    public function get(string $query, array $params = [], string $types = ''): \stdClass
     {
         $stmt_result = $params ? $this->query($query, $params, $types) : $this->raw($query);
 
@@ -323,7 +323,7 @@ class PlainMysqli
      *
      * @return \mysqli_stmt|bool
      */
-    public function insert(string $table, array $data)
+    public function add(string $table, array $data)
     {
         $sets   = [];
         $params = [];
@@ -350,7 +350,7 @@ class PlainMysqli
      *
      * @return \mysqli_stmt|bool
      */
-    public function update(string $table, array $data, array $where)
+    public function set(string $table, array $data, array $where)
     {
         $sets   = [];
         $wheres = [];
