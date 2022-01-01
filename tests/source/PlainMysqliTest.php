@@ -83,8 +83,8 @@ class PlainMysqliTest extends TestCase
     public function testQuery()
     {
         $result = self::$db->query(
-            "INSERT INTO `post` SET `title` = ?s, `content` = ?s, `status` = ?i",
-            ['The Second Post', 'The second post description. ', 1]
+            "INSERT INTO `post` SET `title` = ?s, `content` = ?s, `rating` = ?d, `status` = ?i",
+            ['The Second Post', 'The second post description.', 4.1, 1]
         );
 
         $this->assertInstanceOf(\mysqli_stmt::class, $result);
@@ -109,16 +109,65 @@ class PlainMysqliTest extends TestCase
     public function testQueryNamedParameter()
     {
         $result = self::$db->query(
-            "SELECT * FROM `post` WHERE `post_id` IN (:post_ids?i) AND `title` LIKE :title?s AND `status` = :status?i ORDER BY {sort_col} DESC",
+            "SELECT * FROM `post`
+            WHERE `post_id` IN (:post_ids?i)
+                AND `title` LIKE :title?s
+                AND `rating` >= :rating?d
+                AND `status` = :status?i
+            ORDER BY {sort_col} DESC",
             [
                 'post_ids'   => [1, 2, 3],
                 'title'      => '%the%',
+                'rating'     => 3.5,
                 'status'     => 1,
                 '{sort_col}' => 'post_id'
             ]
         )->fetch_assoc();
 
         $this->assertEquals('The Second Post', $result['title']);
+    }
+
+    /**
+     * @depends testQuery
+     */
+    public function testQueryNamedParameterArray()
+    {
+        $result = self::$db->query(
+            "SELECT * FROM `post`
+            WHERE `post_id` IN (:post_ids?i) /* integer */
+                AND `rating` IN (:rating?d)  /* double */
+                AND `status` IN (:status)    /* treated as string */
+            ORDER BY {sort_col} DESC",
+            [
+                'post_ids'   => [1, 2, 3],
+                'rating'     => [4.1, 4.8],
+                'status'     => [1, 0],
+                '{sort_col}' => 'post_id'
+            ]
+        )->fetch_assoc();
+
+        $this->assertEquals('The Second Post', $result['title']);
+    }
+
+    public function testQueryNamedParameterNoToken()
+    {
+        $result = self::$db->query(
+            "SELECT * FROM `post` WHERE `post_id` = ?i",
+            [1, 'mock' => 'fail']
+        );
+
+        $this->assertFalse($result);
+    }
+
+    public function testQueryNamedParameterException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The number of given parameters not match named-parameter');
+
+        self::$db->query(
+            "SELECT * FROM `post` WHERE `post_id` IN (:post_ids?i)",
+            ['post_id' => [1, 2, 3],]
+        );
     }
 
     /**
