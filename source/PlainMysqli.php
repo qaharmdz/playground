@@ -47,6 +47,7 @@ class PlainMysqli
             [
                 'query_fallback' => true
             ],
+            $this->config,
             $configuration
         );
     }
