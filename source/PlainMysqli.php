@@ -26,17 +26,17 @@ class PlainMysqli
         string $username,
         string $password,
         string $database,
-        string $charset = 'utf8mb4',
-        string $collation = 'utf8mb4_unicode_520_ci',
         int $port = 3306,
-        string $socket = null
+        string $socket = null,
+        string $charset = 'utf8mb4',
+        string $collation = 'utf8mb4_unicode_520_ci'
     ) {
         mysqli_report(\MYSQLI_REPORT_ERROR | \MYSQLI_REPORT_STRICT);
 
         $this->mysqli = new \mysqli($host, $username, $password, $database, $port, $socket);
         $this->mysqli->set_charset($charset);
         $this->mysqli->options(\MYSQLI_OPT_INT_AND_FLOAT_NATIVE, 1);
-        $this->mysqli->query('SET NAMES utf8mb4 COLLATE utf8mb4_unicode_520_ci');
+        $this->mysqli->query('SET NAMES ' . $charset . ' COLLATE ' . $collation);
 
         $this->setConfig();
     }
