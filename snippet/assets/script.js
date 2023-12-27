@@ -49,7 +49,11 @@ $(document).ready(function() {
             { data : 'group' },
             { data : 'tags',
               render : function(data, type, full) {
-                output  = '<span class="label">' + data + '</span>';
+                // output  = '<span class="label">' + data + '</span>';
+                output  = '';
+                $.each(data, function( index, value ) {
+                  output  += '<span class="label">' + value + '</span>';
+                });
                 return output;
               }
             },

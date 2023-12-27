@@ -54,5 +54,13 @@
             "ipaddress"
         ],
         "content": "<pre><code class=\"language-php\">function getIp()\n{\n    return getenv('HTTP_CLIENT_IP') ?: (\n        getenv('HTTP_X_FORWARDED_FOR') ?: (\n            getenv('HTTP_X_FORWARDED') ?: (\n                getenv('HTTP_FORWARDED_FOR') ?: (\n                    getenv('HTTP_FORWARDED') ?: (\n                        getenv('REMOTE_ADDR') ?: $_SERVER['REMOTE_ADDR']\n                    )\n                )\n            )\n        )\n    );\n}<\/code><\/pre>"
+    },
+    {
+        "group": "Sublime",
+        "tags": [
+            "search",
+            "regex"
+        ],
+        "content": "<p>Search multiple <code>$this-&gt;request<\/code> or <code>$this-&gt;response<\/code>.<\/p>\n<pre><code class=\"language-javascript\">\\$this-&gt;request|\\$this-&gt;response|\\$this-&gt;request-&gt;server\n\\$this-&gt;request-&gt;get\\[|\\$this-&gt;request-&gt;post|\\$this-&gt;request-&gt;server<\/code><\/pre>"
     }
 ]

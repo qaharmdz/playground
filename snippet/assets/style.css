@@ -164,6 +164,9 @@ pre code {
   white-space: nowrap;
   border-radius: 2px;
 }
+.label + .label {
+  margin-left: 3px;
+}
 .url-icon {
   margin-left: 3px;
 }

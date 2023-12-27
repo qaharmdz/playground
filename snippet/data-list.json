@@ -2,6 +2,7 @@
     "group": [
         "Github",
         "PHP",
+        "Sublime",
         "jQuery"
     ],
     "tags": [
@@ -10,6 +11,8 @@
         "event",
         "exception",
         "ipaddress",
+        "regex",
+        "search",
         "time",
         "tips",
         "xml"
