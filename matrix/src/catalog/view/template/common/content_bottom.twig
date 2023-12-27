@@ -1,0 +1,9 @@
+{% if modules %}
+<div id="content-bottom">
+  {% for key, module in modules %}
+    <div class="cb-module-{{ key }}">
+      {{ module }}
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
