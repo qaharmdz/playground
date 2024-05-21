@@ -1,16 +1,21 @@
-import React from 'react';
-import { json } from "react-router-dom";
+import { useEffect } from 'react';
+import { useOutletContext } from "react-router-dom";
 
 const About = () => {
-  // throw new Response("Not Found", { status: 404 });
-  throw json(
-    {
-      message: "Throw API error.",
-    },
-    { status: 401 }
-  );
+  const [pageMeta, setPageMeta] = useOutletContext();
+  const pageInfo = {
+    title: 'About',
+  };
 
-  return <div>About Page</div>;
+  useEffect(() => {
+    setPageMeta({ ...pageMeta, ...pageInfo })
+  }, []);
+
+  return (
+    <div>
+      <p>Welcome to the About Page!</p>
+    </div>
+  );
 };
 
 export default About;
