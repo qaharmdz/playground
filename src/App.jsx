@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { Outlet, Link, useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { SettingsProvider } from './services/SettingsContext';
 import Navbar from './elements/NavBar';
+
+import './App.css';
 
 const App = () => {
   const location = useLocation();
