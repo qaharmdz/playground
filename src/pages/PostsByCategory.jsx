@@ -33,7 +33,7 @@ const PostsByCategory = () => {
       <ul>
         {posts.map(post => (
           <li key={post.id}>
-            <Link to={`/posts/${post.id}`}>{post.title}</Link>
+            <Link to={`/posts/url/${post.url_alias}`}>{post.title}</Link>
           </li>
         ))}
       </ul>

@@ -36,6 +36,9 @@ async function addData(storeName, data) {
 }
 
 async function getData(storeName, key) {
+  if (key == null) {
+    throw new Error(`Invalid key: ${key}`);
+  }
   const store = await getStore(storeName);
   return store.get(key);
 }
@@ -43,6 +46,14 @@ async function getData(storeName, key) {
 async function getAllData(storeName) {
   const store = await getStore(storeName);
   return store.getAll();
+}
+
+async function getDataByPage(storeName, page = 1, itemsPerPage = 10) {
+  const store = await getStore(storeName);
+  const allItems = await store.getAll();
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return allItems.slice(start, end);
 }
 
 async function updateData(storeName, data) {
@@ -65,6 +76,7 @@ export {
   addData,
   getData,
   getAllData,
+  getDataByPage,
   updateData,
   deleteData,
   clearStore,

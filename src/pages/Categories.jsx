@@ -8,10 +8,14 @@ const Categories = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const categoryData = await getAllData(STORE_NAMES.categories);
-      const postData = await getAllData(STORE_NAMES.posts);
-      setCategories(categoryData);
-      setPosts(postData);
+      try {
+        const allCategories = await getAllData(STORE_NAMES.categories);
+        const allPosts = await getAllData(STORE_NAMES.posts);
+        setCategories(allCategories);
+        setPosts(allPosts);
+      } catch (error) {
+        console.error("Error fetching categories or posts:", error);
+      }
     }
 
     fetchData();
@@ -27,9 +31,12 @@ const Categories = () => {
           </h3>
           <p>{category.short_description}</p>
           <ul>
-            {posts.filter(post => post.categories.includes(category.id)).map(post => (
+            {posts.filter(post => post.categories.includes(category.id)).slice(0, 6).map((post, index) => (
               <li key={post.id}>
-                <Link to={`/categories/${category.url_alias}/posts/${post.url_alias}`}>{post.title}</Link>
+                <Link to={`/posts/url/${post.url_alias}`}>
+                  {post.title}
+                </Link>
+                {index < 2 && <p>{post.content.slice(0, 100)}...</p>}
               </li>
             ))}
           </ul>

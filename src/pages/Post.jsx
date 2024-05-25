@@ -18,15 +18,11 @@ const Post = () => {
         postData = allPosts.find(p => p.url_alias === urlAlias);
       }
 
-      // console.log(postData);
-
       if (postData) {
         setPost(postData);
         const allCategories = await getAllData(STORE_NAMES.categories);
         const postCategories = allCategories.filter(cat => postData.categories.includes(cat.id));
         setCategories(postCategories);
-
-        // console.log(categories);
 
         const allTags = await getAllData(STORE_NAMES.tags);
         const postTags = allTags.filter(tag => postData.tags.includes(tag.id));
