@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import postsData from '../data/postsData';
+import { getAllData, STORE_NAMES } from '../services/indexedDB';
 
 const Tags = () => {
-  const tags = [...new Set(postsData.flatMap(post => post.tags))];
+  const [tags, setTags] = useState([]);
+
+  useEffect(() => {
+    async function fetchTags() {
+      const data = await getAllData(STORE_NAMES.tags);
+      setTags(data);
+    }
+
+    fetchTags();
+  }, []);
 
   return (
     <div>
       <h2>Tags</h2>
       <ul>
-        {tags.map((tag, index) => (
-          <li key={index}>
-            <Link to={`/tags/${tag}`}>{tag}</Link>
+        {tags.map(tag => (
+          <li key={tag.id}>
+            <Link to={`/tags/${tag.url_alias}`}>{tag.name}</Link>
           </li>
         ))}
       </ul>

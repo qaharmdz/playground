@@ -1,25 +1,39 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import postsData from '../data/postsData';
-import categoriesData from '../data/categoriesData';
+import { getAllData, STORE_NAMES } from '../services/indexedDB';
 
 const PostsByCategory = () => {
   const { categoryAlias } = useParams();
-  const category = categoriesData.find(cat => cat.url_alias === categoryAlias);
+  const [category, setCategory] = useState(null);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const allCategories = await getAllData(STORE_NAMES.categories);
+      const foundCategory = allCategories.find(cat => cat.url_alias === categoryAlias);
+      setCategory(foundCategory);
+
+      if (foundCategory) {
+        const allPosts = await getAllData(STORE_NAMES.posts);
+        const categoryPosts = allPosts.filter(post => post.categories.includes(foundCategory.id));
+        setPosts(categoryPosts);
+      }
+    }
+
+    fetchData();
+  }, [categoryAlias]);
 
   if (!category) {
     return <div>Category not found</div>;
   }
 
-  const filteredPosts = postsData.filter(post => post.categories.includes(category.id));
-
   return (
     <div>
-      <h2>Posts in Category: {category.name}</h2>
+      <h2>Posts in {category.name}</h2>
       <ul>
-        {filteredPosts.map(post => (
+        {posts.map(post => (
           <li key={post.id}>
-            <Link to={`/categories/${categoryAlias}/posts/${post.url_alias}`}>{post.title}</Link>
+            <Link to={`/posts/${post.id}`}>{post.title}</Link>
           </li>
         ))}
       </ul>

@@ -1,25 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import postsData from '../data/postsData';
-import categoriesData from '../data/categoriesData';
-import tagsData from '../data/tagsData';
+import { getData, getAllData, STORE_NAMES } from '../services/indexedDB';
 
 const Post = () => {
   const { postId, urlAlias, categoryAlias } = useParams();
-  let post;
+  const [post, setPost] = useState(null);
+  const [categories, setCategories] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  if (postId) {
-    post = postsData.find(p => p.id === parseInt(postId, 10));
-  } else if (urlAlias) {
-    post = postsData.find(p => p.url_alias === urlAlias);
-  }
+  useEffect(() => {
+    async function fetchData() {
+      let postData;
+      if (postId) {
+        postData = await getData(STORE_NAMES.posts, parseInt(postId, 10));
+      } else if (urlAlias) {
+        const allPosts = await getAllData(STORE_NAMES.posts);
+        postData = allPosts.find(p => p.url_alias === urlAlias);
+      }
+
+      console.log(postData);
+
+      if (postData) {
+        setPost(postData);
+        const allCategories = await getAllData(STORE_NAMES.categories);
+        const postCategories = allCategories.filter(cat => postData.categories.includes(cat.id));
+        setCategories(postCategories);
+
+        console.log(categories);
+
+        const allTags = await getAllData(STORE_NAMES.tags);
+        const postTags = allTags.filter(tag => postData.tags.includes(tag.id));
+        setTags(postTags);
+      }
+    }
+
+    fetchData();
+  }, [postId, urlAlias]);
 
   if (!post) {
     return <div>Post not found</div>;
   }
-
-  const categories = categoriesData.filter(cat => post.categories.includes(cat.id));
-  const tags = tagsData.filter(tag => post.tags.includes(tag.id));
 
   return (
     <div>
