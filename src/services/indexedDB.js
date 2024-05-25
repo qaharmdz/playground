@@ -1,7 +1,7 @@
 import { openDB } from 'idb';
 
 const DATABASE_NAME = 'dbTonggo';
-const DATABASE_VERSION = 1;
+const DATABASE_VERSION = 1; // DB schema version
 const STORE_NAMES = {
   posts: 'posts',
   categories: 'categories',
