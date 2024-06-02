@@ -31,7 +31,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'src/data',
+          src: 'src/public/data',
           dest: '' // copies to the root of the distribution directory
         }
       ]

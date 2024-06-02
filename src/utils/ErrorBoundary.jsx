@@ -30,6 +30,8 @@ class ErrorBoundary extends React.Component {
       return (
         <div>
           <h1>Something went wrong.</h1>
+
+          {/* TODO: output more errors details */}
         </div>
       );
     }

@@ -1,22 +1,24 @@
 const CONFIG = {
-  name: 'Allama',
-  codeName: 'allama',
-  version: '1.0.0',
+  name: "Allama",
+  codeName: "allama",
+  tagline: "Tagline: Khairukum man ta'allamal Quraana wa'allamahu (HR. Bukhari)",
+  version: "1.0.0",
   Database: {
-    name: 'dbAllama',
+    name: "dbAllama",
     VERSION: 1,
   },
   settings: {
-    theme: 'auto',
-    language: 'en',
+    theme: "auto",
+    language: "en",
     splashScreenDelay: 1500, // milliseconds
+    limitPerPage: 10,
   },
   dataApi: {
-    baseUrl: process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://example.com',
-    meta: '/data/meta.json', // contain app name and database version
-    posts: '/data/posts/', // format catid-x_posts.json
-    categories: '/data/categories.json',
-    tags: '/data/tags.json'
+    baseUrl: process.env.NODE_ENV === "development" ? "https://localhost:5173" : "https://example.com",
+    meta: "/data/meta.json", // contain data version
+    posts: "/data/posts/", // format category-codename_posts.json
+    categories: "/data/categories.json",
+    tags: "/data/tags.json"
   },
 };
 

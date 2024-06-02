@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "parent_id": 0,
+    "codename": "ayat-imam",
+    "title": "Math for Beginner",
+    "teaser": "Learn about numbers and equations",
+    "description": "Detailed description about Math",
+    "priority": 0,
+    "date_updated": "2024-06-01T00:00:00Z"
+  }
+]
