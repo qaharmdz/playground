@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Outlet } from 'react-router-dom';
-import updateIndexedDB from './utils/fetchData';
+import updateIndexedDB from './utils/dataFetch';
 
 import './App.css'
 

@@ -1,7 +1,7 @@
 const CONFIG = process.env.CONFIG;
 import { getDbData, setDbData, clearStore } from './db';
 
-const fetchData = async (url) => {
+const dataFetch = async (url) => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`Failed to fetch data from ${url}`);
@@ -13,7 +13,7 @@ const fetchAllPosts = async (categories) => {
   const posts = [];
   for (const category of categories) {
     const postsUrl = `${CONFIG.dataApi.baseUrl}${CONFIG.dataApi.posts}cat_${category.codename}_posts.json`;
-    const categoryPosts = await fetchData(postsUrl);
+    const categoryPosts = await dataFetch(postsUrl);
 
     // Add compositeId to each post
     categoryPosts.forEach(post => {
@@ -28,17 +28,17 @@ const fetchAllPosts = async (categories) => {
 const updateIndexedDB = async () => {
   try {
     const metaUrl = `${CONFIG.dataApi.baseUrl}${CONFIG.dataApi.meta}`;
-    const meta = await fetchData(metaUrl);
+    const meta = await dataFetch(metaUrl);
     const localMeta = await getDbData('meta', 'appMeta');
 
     if (!localMeta || localMeta.dataVersion !== meta.dataVersion) {
       const categoriesUrl = `${CONFIG.dataApi.baseUrl}${CONFIG.dataApi.categories}`;
-      const categories = await fetchData(categoriesUrl);
+      const categories = await dataFetch(categoriesUrl);
 
       const posts = await fetchAllPosts(categories);
 
       const tagsUrl = `${CONFIG.dataApi.baseUrl}${CONFIG.dataApi.tags}`;
-      const tags = await fetchData(tagsUrl);
+      const tags = await dataFetch(tagsUrl);
 
       // Clear old data
       await clearStore('posts');

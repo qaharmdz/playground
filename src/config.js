@@ -3,9 +3,9 @@ const CONFIG = {
   codeName: "allama",
   tagline: "Tagline: Khairukum man ta'allamal Quraana wa'allamahu (HR. Bukhari)",
   version: "1.0.0",
-  Database: {
+  database: {
     name: "dbAllama",
-    VERSION: 1,
+    schemaVersion: 1,
   },
   settings: {
     theme: "auto",
