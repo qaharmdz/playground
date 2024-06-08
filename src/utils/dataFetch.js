@@ -1,5 +1,5 @@
 const CONFIG = process.env.CONFIG;
-import { getDbData, setDbData, clearStore } from './db';
+import { dbGetData, dbSetData, clearStore } from './db';
 
 const dataFetch = async (url) => {
   const response = await fetch(url);
@@ -29,7 +29,7 @@ const updateIndexedDB = async () => {
   try {
     const metaUrl = `${CONFIG.dataApi.baseUrl}${CONFIG.dataApi.meta}`;
     const meta = await dataFetch(metaUrl);
-    const localMeta = await getDbData('meta', 'appMeta');
+    const localMeta = await dbGetData('meta', 'appMeta');
 
     if (!localMeta || localMeta.dataVersion !== meta.dataVersion) {
       const categoriesUrl = `${CONFIG.dataApi.baseUrl}${CONFIG.dataApi.categories}`;
@@ -46,12 +46,12 @@ const updateIndexedDB = async () => {
       await clearStore('tags');
 
       // Store new data
-      await setDbData('posts', posts);
-      await setDbData('categories', categories);
-      await setDbData('tags', tags);
+      await dbSetData('posts', posts);
+      await dbSetData('categories', categories);
+      await dbSetData('tags', tags);
 
       // Update local meta
-      await setDbData('meta', [{ name: 'appMeta', dataVersion: meta.dataVersion }]);
+      await dbSetData('meta', [{ name: 'appMeta', dataVersion: meta.dataVersion }]);
     }
   } catch (error) {
     console.error('Error updating IndexedDB:', error);
