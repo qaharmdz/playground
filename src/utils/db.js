@@ -1,6 +1,5 @@
 import { openDB } from 'idb';
-
-const CONFIG = process.env.CONFIG;
+import CONFIG from '../config';
 
 const dbInitSchema = async (db) => {
   const storeNames = db.objectStoreNames;

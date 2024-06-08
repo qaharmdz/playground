@@ -1,4 +1,4 @@
-const CONFIG = process.env.CONFIG;
+import CONFIG from '../config';
 import { dbGetData, dbSetData, clearStore } from './db';
 
 const dataFetch = async (url) => {

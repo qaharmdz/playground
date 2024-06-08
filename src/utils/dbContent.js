@@ -1,7 +1,6 @@
+import CONFIG from '../config';
 import { dbGetAllData, dbGetAllDataByIndex, dbGetData } from './db';
 import { sortData, paginateData } from './dataHelper';
-
-const CONFIG = process.env.CONFIG;
 
 const getAllCategories = async () => {
   let categories = await dbGetAllData('categories');

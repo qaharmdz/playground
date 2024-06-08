@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "compositeId": "{auto}",
     "type": "article",
     "title": "Introduction to Algebra",
     "teaser": "Basics of algebra",

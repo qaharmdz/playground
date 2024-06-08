@@ -16,7 +16,7 @@ const CONFIG = {
   dataApi: {
     baseUrl: process.env.NODE_ENV === "development" ? "https://localhost:5173" : "https://example.com",
     meta: "/data/meta.json", // contain data version
-    posts: "/data/posts/", // format category-codename_posts.json
+    posts: "/data/posts/", // format cat_codename_posts.json
     categories: "/data/categories.json",
     tags: "/data/tags.json"
   },

@@ -90,7 +90,7 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Welcome</h1>
+      <h1>Allama</h1>
     </div>
   );
 };
