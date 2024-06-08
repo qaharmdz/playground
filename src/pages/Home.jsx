@@ -13,6 +13,8 @@ import {
   getPostByCompositeId
 } from '../utils/dbContent';
 
+import { userGetAllSettings, userGetSetting } from '../utils/dbUser'
+
 // ## Example 1
 const showAllCategoriesWithPosts = async () => {
   try {
@@ -87,6 +89,14 @@ const Home = () => {
 
   // Example usage for a post with compositeId 'ayat-imam_1'
   showPostPage('ayat-imam_1');
+
+  (async () => {
+    const settings = await userGetAllSettings();
+    console.log('userSettings', settings);
+
+    const foo = await userGetSetting('foo', 'bar');
+    console.log('userGetSetting', foo);
+  })();
 
   return (
     <div>

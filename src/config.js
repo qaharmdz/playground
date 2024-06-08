@@ -8,7 +8,7 @@ const CONFIG = {
     schemaVersion: 1,
   },
   settings: {
-    theme: "auto",
+    theme: "auto", // dark, light, auto
     language: "en",
     splashScreenDelay: 1000, // milliseconds
     limitPerPage: 10,
