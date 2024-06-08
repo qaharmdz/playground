@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+
+import CONFIG from './config';
 import updateIndexedDB from './utils/dataFetch';
 
 import './App.css'
-
-const CONFIG = process.env.CONFIG;
 
 function App() {
   const [showSplashScreen, setShowSplashScreen] = useState(true);
@@ -12,7 +12,6 @@ function App() {
 
   const hideSplashScreen = () => {
     setTimeout(() => {
-      console.log('hideSplashScreen');
       setShowSplashScreen(false);
     }, CONFIG.settings.splashScreenDelay);
   };
@@ -20,26 +19,29 @@ function App() {
   useEffect(() => {
     if (!showSplashScreen) return;
 
-    console.log('App.js useEffect');
-    if (!navigator.onLine) {
-      setSplashMessage('No internet connection. Using offline data.');
-      hideSplashScreen();
-      return;
-    }
-
     const initializeData = async () => {
-      await updateIndexedDB();
+      try {
+        if (!navigator.onLine) {
+          setSplashMessage('No internet connection. Using offline data.');
+          hideSplashScreen();
+          return;
+        }
+
+        setSplashMessage('Updating data...');
+        await updateIndexedDB();
+        setSplashMessage('Update successful!');
+      } catch (error) {
+        setSplashMessage('Error updating data.');
+        console.error('Error updating IndexedDB:', error);
+      } finally {
+        hideSplashScreen();
+      }
     };
 
-    try {
+    setTimeout(() => {
       initializeData();
-      setSplashMessage('Update successful!');
-    } catch (error) {
-      setSplashMessage('Error updating data.');
-    } finally {
-      hideSplashScreen();
-    }
-  }, []);
+    }, CONFIG.settings.splashScreenDelay * .5);
+  }, [showSplashScreen]);
 
   if (showSplashScreen) {
     return (
