@@ -10,7 +10,7 @@ const CONFIG = {
   settings: {
     theme: "auto",
     language: "en",
-    splashScreenDelay: 1500, // milliseconds
+    splashScreenDelay: 1000, // milliseconds
     limitPerPage: 10,
   },
   dataApi: {

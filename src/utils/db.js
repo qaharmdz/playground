@@ -34,7 +34,7 @@ const dbInitSchema = async (db) => {
 const dbGetConnection = async () => {
   return openDB(CONFIG.database.name, CONFIG.database.schemaVersion, {
     upgrade(db, oldVersion, newVersion, transaction) {
-      dbInitSchema(db);
+      console.log(`Upgrading DB from version ${oldVersion} to ${newVersion}`);
       dbInitSchema(db);  // Reinitialize schema
     },
   });
