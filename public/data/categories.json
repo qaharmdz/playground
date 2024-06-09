@@ -2,11 +2,56 @@
   {
     "id": 1,
     "parent_id": 0,
+    "codename": "ayat-rabbana",
+    "title": "Ayat Rabbana",
+    "teaser": "Ayat-ayat doa mengandung kata Rabbana (Ya Tuhan kami)",
+    "description": "Ayat-ayat doa mengandung kata Rabbana (Ya Tuhan kami)",
+    "status": 1,
+    "priority": 999,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "parent_id": 0,
     "codename": "ayat-imam",
     "title": "Ayat Imam",
-    "teaser": "Learn about numbers and equations",
-    "description": "Detailed description about Math",
-    "priority": 0,
+    "teaser": "Ayat-ayat pilihan yang sering dibaca oleh imam sholat",
+    "description": "Ayat-ayat pilihan yang sering dibaca oleh imam sholat",
+    "status": 1,
+    "priority": 998,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 3,
+    "parent_id": 0,
+    "codename": "ayat-kultum",
+    "title": "Ayat Kultum",
+    "teaser": "Ayat Al-Quran materi kultum",
+    "description": "Al-Quran materi kultum",
+    "status": 0,
+    "priority": 997,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 4,
+    "parent_id": 0,
+    "codename": "hadist-populer",
+    "title": "Hadist Populer",
+    "teaser": "Hadist popular dikalangan umat Islam",
+    "description": "Hadist popular dikalangan umat Islam",
+    "status": 1,
+    "priority": 996,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 5,
+    "parent_id": 0,
+    "codename": "mutiara-nasihat",
+    "title": "Mutiara Nasihat",
+    "teaser": "",
+    "description": "",
+    "status": 1,
+    "priority": 995,
     "date_updated": "2024-06-01T00:00:00Z"
   }
 ]

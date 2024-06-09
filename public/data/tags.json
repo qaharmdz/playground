@@ -2,8 +2,45 @@
   {
     "id": 1,
     "codename": "quran",
-    "title": "Quran",
-    "description": "Detailed description about Math",
+    "title": "Al-Qur'an",
+    "description": "",
+    "status": 0,
+    "priority": 0,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 2,
+    "codename": "hadits",
+    "title": "Hadits",
+    "description": "",
+    "status": 0,
+    "priority": 0,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 3,
+    "codename": "iman",
+    "title": "Iman",
+    "description": "",
+    "status": 1,
+    "priority": 0,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 4,
+    "codename": "shalat",
+    "title": "Shalat",
+    "description": "",
+    "status": 1,
+    "priority": 0,
+    "date_updated": "2024-06-01T00:00:00Z"
+  },
+  {
+    "id": 5,
+    "codename": "asmaul-husna",
+    "title": "Asmaul Husna",
+    "description": "",
+    "status": 1,
     "priority": 0,
     "date_updated": "2024-06-01T00:00:00Z"
   }

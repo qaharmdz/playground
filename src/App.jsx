@@ -8,9 +8,12 @@ import './App.css'
 
 function App() {
   const [showSplashScreen, setShowSplashScreen] = useState(true);
-  const [splashMessage, setSplashMessage] = useState('Checking for updates...');
+  const [splashMessage, setSplashMessage] = useState('Checking for updates..');
 
   const hideSplashScreen = () => {
+    setTimeout(() => {
+      setSplashMessage('Initializing app..');
+    }, CONFIG.settings.splashScreenDelay * .7);
     setTimeout(() => {
       setShowSplashScreen(false);
     }, CONFIG.settings.splashScreenDelay);
@@ -28,8 +31,14 @@ function App() {
         }
 
         setSplashMessage('Updating data...');
-        await updateIndexedDB();
-        setSplashMessage('Update successful!');
+        const status = await updateIndexedDB();
+        console.log('updateIndexedDb', status);
+
+        if (status === 'no-update') {
+          setSplashMessage('You\'re up to date!');
+        } else {
+          setSplashMessage('Update successful!');
+        }
       } catch (error) {
         setSplashMessage('Error updating data.');
         console.error('Error updating IndexedDB:', error);
@@ -60,11 +69,12 @@ function App() {
         <main className="app-outlet">
 
           <div className="app-nav-main">
-            <div className="app-sidebar">
-              #
+            {/* <div className="app-sidebar">#</div> */}
+            <div className="app-name">
+              Allama{' '}
+              <span className="app-version">v1.0-b.1</span>
             </div>
-            <div className="app-name">Allama</div>
-            <div className="app-name">[?]</div>
+            {/* <div className="app-links">[?]</div> */}
           </div>
 
           <div className="app-content">
