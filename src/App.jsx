@@ -57,8 +57,28 @@ function App() {
   return (
     <div className="app-wrapper">
       <div className="app-container">
-        <main className="app-content">
-          <Outlet />
+        <main className="app-outlet">
+
+          <div className="app-nav-main">
+            <div className="app-sidebar">
+              #
+            </div>
+            <div className="app-name">Allama</div>
+            <div className="app-name">[?]</div>
+          </div>
+
+          <div className="app-content">
+            <Outlet />
+          </div>
+
+          <div className="app-floatbar">
+            <div className="app-floatbar-content">
+              <div>Home</div>
+              <div>ToC</div>
+              <div>Bookmarks</div>
+              <div>Settings</div>
+            </div>
+          </div>
         </main>
       </div>
     </div>
