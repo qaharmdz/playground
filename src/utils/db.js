@@ -6,7 +6,7 @@ const dbInitSchema = async (db) => {
 
   if (!storeNames.contains('posts')) {
     const postStore = db.createObjectStore('posts', { keyPath: 'compositeId' });
-    postStore.createIndex('category', 'categories', { multiEntry: true });
+    postStore.createIndex('categories', 'categories', { multiEntry: true });
     postStore.createIndex('tags', 'tags', { multiEntry: true });
     postStore.createIndex('priority', 'priority');
   }

@@ -47,12 +47,13 @@ const paginateData = (data, page, limit) => {
  * Custom hook to fetch data with loading and error states.
  *
  * @param {Function} fetchFunction - The async function to fetch data. Must return a Promise.
+ * @param {Array} params - Parameters to pass to the fetchFunction.
  * @returns {Object} An object containing:
  *  - data: The fetched data or null if not yet fetched.
  *  - loading: Boolean indicating whether the data is currently being fetched.
  *  - error: An error object if an error occurred during fetching, otherwise null.
  */
-const useGetData = (fetchFunction) => {
+const useGetData = (fetchFunction, params = []) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -61,7 +62,7 @@ const useGetData = (fetchFunction) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const result = await fetchFunction();
+        const result = await fetchFunction(...params);
         setData(result);
       } catch (error) {
         setError(error);
@@ -71,7 +72,7 @@ const useGetData = (fetchFunction) => {
     };
 
     fetchData();
-  }, [fetchFunction]);
+  }, [fetchFunction, ...params]);
 
   return { data, loading, error };
 };

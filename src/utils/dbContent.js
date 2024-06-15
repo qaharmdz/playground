@@ -2,22 +2,32 @@ import CONFIG from '../config';
 import { dbGetAllData, dbGetAllDataByIndex, dbGetData } from './db';
 import { sortData, filterStatus, paginateData } from './dataHelper';
 
+
 const getAllCategories = async () => {
   let categories = await dbGetAllData('categories');
   categories = filterStatus(categories, 1);
   return sortData(categories, 'priority', 'desc');
 };
 
+const getCategoryById = async (categoryId) => {
+  const intCategoryId = parseInt(categoryId, 10);
+  return await dbGetData('categories', intCategoryId);
+};
+
 const getAllPostsByCategory = async (categoryId) => {
-  let posts = await dbGetAllDataByIndex('posts', 'category', categoryId);
+  const intCategoryId = parseInt(categoryId, 10);
+  let posts = await dbGetAllDataByIndex('posts', 'categories', intCategoryId);
   posts = filterStatus(posts, 1);
   return sortData(posts, 'priority', 'desc');
 };
 
 const getPostsByCategoryForPage = async (categoryId, page) => {
-  let allPosts = await getAllPostsByCategory(categoryId);
-  return paginateData(allPosts, page, CONFIG.settings.limitPerPage);
+  const intCategoryId = parseInt(categoryId, 10);
+  const intPage = parseInt(page, 10);
+  let allPosts = await getAllPostsByCategory(intCategoryId);
+  return paginateData(allPosts, intPage, CONFIG.settings.limitPerPage);
 };
+
 
 const getAllTags = async () => {
   let tags = await dbGetAllData('tags');
@@ -25,12 +35,17 @@ const getAllTags = async () => {
   return sortData(tags, 'priority', 'desc');
 };
 
+const getTagById = async (tagId) => {
+  const intTagId = parseInt(tagId, 10);
+  return await dbGetData('tags', intTagId);
+};
+
 const getAllPostsByTag = async (tagId) => {
-  let posts = await dbGetAllDataByIndex('posts', 'tags', tagId);
+  const intTagId = parseInt(tagId, 10);
+  let posts = await dbGetAllDataByIndex('posts', 'tags', intTagId);
   posts = filterStatus(posts, 1);
   return sortData(posts, 'priority', 'desc');
 };
-
 
 
 const getPostByCompositeId = async (compositeId) => {
@@ -52,7 +67,7 @@ const getPostByCompositeId = async (compositeId) => {
 };
 
 export {
-  getAllCategories, getAllPostsByCategory, getPostsByCategoryForPage,
-  getAllTags, getAllPostsByTag,
+  getCategoryById, getAllCategories, getAllPostsByCategory, getPostsByCategoryForPage,
+  getTagById, getAllTags, getAllPostsByTag,
   getPostByCompositeId
 };

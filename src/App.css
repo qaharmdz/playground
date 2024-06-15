@@ -251,7 +251,6 @@ ol {
 .ui-card {
   position: relative;
   background: #fff;
-  /* background: #f8fbf8; */
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
 
@@ -266,6 +265,7 @@ ol {
   font-size: calc(var(--base-font-size) * 0.92);
   padding: 1px var(--base-gap-sm);
   border-radius: var(--border-radius-sm);
+  box-shadow: var(--shadow-sm);
 }
 
 /* === Utilities */
@@ -304,6 +304,8 @@ ol {
 
 :root {
   --base-background: #e1ebd2;
+  --base-background: #eef3e6;
+  /* --base-background: #fafcf7; */
 
   /* https://www.color-hex.com/color-palette/1036745 */
   --green-gradient: linear-gradient(145deg, #bfcfa8 10%, #3e713b 100%);
@@ -375,20 +377,20 @@ ol {
   .backdrop-top {
     background: #3e713b;
     background: linear-gradient(160deg, #b1c84b 20%, #92c648 60%, #4c8149 100%);
-    height: 32vh;
-    width: 120vw;
+    height: 21rem;
+    width: 40rem;
     position: absolute;
-    top: 0.5vh;
+    top: -8.5rem;
     left: -10px;
     right: -10px;
     z-index: -2;
     border-radius: 5rem;
-    transform: skew(0deg, -12deg) translateY(-90px);
+    transform: skew(0deg, -12deg);
   }
   .bd-bottom {
     top: auto;
-    height: 22vh;
-    bottom: -15vh;
+    height: 10rem;
+    bottom: -7rem;
     border-radius: 2.5rem;
     transform: skew(16deg, -7deg) translateX(-7.5rem);
   }
@@ -402,16 +404,26 @@ ol {
   bottom: 0;
   left: 0;
   right: 0;
-}
-.app-floatbar-content {
-  color: var(--base-color-inverse);
-  background: var(--base-background-inverse);
-  height: 40px;
-  border-radius: var(--border-radius-sm);
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-content: center;
-  flex-wrap: wrap;
+  .app-floatbar-content {
+    color: var(--base-color-inverse);
+    background: var(--base-background-inverse);
+    height: 40px;
+    border-radius: var(--border-radius-sm);
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+
+  a {
+    color: var(--base-color-inverse);
+    text-decoration: none;
+  }
+  .active {
+    color: #b1c84b;
+    border-bottom: 2px solid #ddcc69;
+  }
 }

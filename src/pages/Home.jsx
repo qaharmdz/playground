@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { getAllCategories, getAllTags } from '../utils/dbContent';
+import { useNavigate } from "react-router-dom";
+
 import { useGetData } from '../utils/dataHelper';
+import { getAllCategories, getAllTags } from '../utils/dbContent';
 
 const Home = () => {
-  console.log('page Home');
+  const navigate = useNavigate();
 
-  const { data: categories, loading: categoryLoading, error: categoryError } = useGetData(getAllCategories);
+  const { data: categories, loading: catsLoading, error: catsError } = useGetData(getAllCategories);
   const { data: tags, loading: tagsLoading, error: tagsError } = useGetData(getAllTags);
 
   return (
@@ -25,8 +27,8 @@ const Home = () => {
             <h2>Kategori</h2>
             <div className="ui-grid ui-grid-col-2">
               {categories && categories.map((category, index) => (
-                <div key={index} className="ui-card">
-                  <h4>{category.title}</h4>
+                <div key={index} className="ui-card" onClick={() => { navigate(`/category/${category.id}`) }}>
+                  <h4>{category.title} </h4>
                   {category.teaser && <p>{category.teaser}</p>}
                 </div>
               ))}

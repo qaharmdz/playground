@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 
 import CONFIG from './config';
 import updateIndexedDB from './utils/dataFetch';
 
 import './App.css'
 
-function App() {
+const App = () => {
   const [showSplashScreen, setShowSplashScreen] = useState(true);
   const [splashMessage, setSplashMessage] = useState('Checking for updates..');
 
@@ -83,10 +83,10 @@ function App() {
 
           <div className="app-floatbar">
             <div className="app-floatbar-content">
-              <div>Home</div>
-              <div>ToC</div>
-              <div>Bookmarks</div>
-              <div>Settings</div>
+              <NavLink to="/">Home</NavLink>
+              <div>Search</div>
+              {/* <div>Bookmarks</div> */}
+              <NavLink to="/settings">Settings</NavLink>
             </div>
           </div>
         </main>

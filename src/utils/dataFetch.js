@@ -20,7 +20,7 @@ const fetchAllPosts = async (categories) => {
 
       // Add compositeId to each post
       categoryPosts.forEach(post => {
-        post.compositeId = `${category.codename}_${post.id}`;
+        post.compositeId = `${category.codename}-${post.id}`;
       });
 
       posts.push(...categoryPosts);
@@ -32,7 +32,6 @@ const fetchAllPosts = async (categories) => {
 
   return posts;
 };
-
 
 const updateIndexedDB = async () => {
   let status = '';
