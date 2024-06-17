@@ -77,4 +77,28 @@ const useGetData = (fetchFunction, params = []) => {
   return { data, loading, error };
 };
 
-export { sortData, filterStatus, paginateData, useGetData };
+/**
+ * Create HTML tags from JSON data and returns the corresponding HTML tag.
+ *
+ * @param {Array} items - The array from the JSON data.
+ * @returns {Array} - An array of HTML tag generated from the JSON data.
+ */
+const toHtmlStructure = (items) => {
+  const validTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span', 'a', 'ul', 'li', 'ol', 'b', 'i', 'u', 'strong', 'em'];
+
+  return items.map((item, index) => {
+    const Tag = validTags.includes(item.html) ? `${item.html}` : 'div'; // Ensure the tag is valid
+
+    return React.createElement(
+      Tag,
+      {
+        key: index,
+        className: item.class ? item.class : '',
+        lang: item.lang ? item.lang : '',
+        dangerouslySetInnerHTML: { __html: item.text },
+      }
+    );
+  });
+};
+
+export { sortData, filterStatus, paginateData, useGetData, toHtmlStructure };
