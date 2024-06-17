@@ -19,25 +19,21 @@ const Category = () => {
 
   return (
     <div className="ui-flex-column">
-      <p>Category Page #{categoryId}</p>
+      <p>Category #{categoryId}</p>
 
-      {category && (
-        <>
-          <h1>{category.title}</h1>
+      <h1>{category.title}</h1>
 
-          <div className="ui-card">
-            {posts && (
-              <ul>
-                {posts.map((post) => (
-                  <li key={post.id}>
-                    <Link to={`/post/ayat/${post.compositeId}`}>{post.title}</Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </>
-      )}
+      <div className="ui-card">
+        {posts && (
+          <ul>
+            {posts.map((post) => (
+              <li key={post.id}>
+                <Link to={`/post/ayat/${post.compositeId}`}>{post.title}</Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   )
 };

@@ -46,6 +46,12 @@ const Post = () => {
           {toHtmlStructure(data.post.description)}
         </div>
       </div>
+
+      <p>
+        {data.tags.map((tag, index) => (
+          <>{' '}<Link to={`/tag/${tag.id}`}>{tag.title}</Link></>
+        ))}
+      </p>
     </div >
   )
 };
