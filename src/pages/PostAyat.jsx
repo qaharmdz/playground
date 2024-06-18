@@ -19,11 +19,11 @@ const Post = () => {
     <div className="ui-flex-column">
       <p>
         <Link to="/">Home</Link>
-        {' > '}
+        {' / '}
         {data.categories.map((category, index) => (
           <>{' '}<Link to={`/category/${category.id}`}>{category.title}</Link></>
         ))}
-        {' > '}
+        {' / '}
         {data.post.title}
       </p>
 
