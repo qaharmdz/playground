@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useNavigate, Link } from "react-router-dom";
 
 import { useGetData } from '../utils/dataHelper';
 import { getAllCategories, getAllTags } from '../utils/dbContent';
@@ -38,9 +38,7 @@ const Home = () => {
           <h2>Tags</h2>
           <div className="ui-flex-row ui-gap-sm">
             {tags && tags.map((tag, index) => (
-              <div key={index} className="ui-label">
-                {tag.title}
-              </div>
+              <Link key={index} to={`/tag/${tag.id}`} className="ui-label">{tag.title}</Link>
             ))}
           </div>
         </div>

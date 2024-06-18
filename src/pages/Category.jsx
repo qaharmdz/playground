@@ -23,6 +23,12 @@ const Category = () => {
 
       <h1>{category.title}</h1>
 
+      {category.description && (
+        <div className="ui-card">
+          {category.description}
+        </div>
+      )}
+
       <div className="ui-card">
         {posts && (
           <ul>

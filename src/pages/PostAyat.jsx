@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
-import { useGetData, toHtmlStructure } from '../utils/dataHelper';
+import { useGetData, tagFromArrObject } from '../utils/dataHelper';
 import { getPostByCompositeId } from '../utils/dbContent';
 
 const Post = () => {
   const { compositeId } = useParams();
-  const [showTerjemah, setShowTerjemah] = useState(null);
+  const [showTerjemah, setShowTerjemah] = useState(false);
 
   const { data, loading: dataLoading, error: dataError } = useGetData(getPostByCompositeId, [compositeId]);
   console.log('Post', data, dataLoading, dataError);
@@ -21,7 +21,7 @@ const Post = () => {
         <Link to="/">Home</Link>
         {' / '}
         {data.categories.map((category, index) => (
-          <>{' '}<Link to={`/category/${category.id}`}>{category.title}</Link></>
+          <>{' '}<Link key={index} to={`/category/${category.id}`}>{category.title}</Link></>
         ))}
         {' / '}
         {data.post.title}
@@ -30,26 +30,36 @@ const Post = () => {
 
       <h1>{data.post.title}</h1>
 
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            value='1'
-            onChange={(e) => setShowTerjemah(e.target.checked)}
-          />
-          Terjemah
-        </label>
-      </div>
-
-      <div className={`ui-card ${!showTerjemah ? 'ui-terjemah-hide' : ''}`}>
-        <div className="ui-flex-column">
-          {toHtmlStructure(data.post.description)}
+      <div className={`ui-flex-column ${showTerjemah ? 'ui-terjemah-show' : ''}`}>
+        <div className={`ui-card`}>
+          <div className="ui-flex-column">
+            {tagFromArrObject(data.post.description)}
+          </div>
         </div>
+
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value='1'
+              onChange={(e) => setShowTerjemah(e.target.checked)}
+            />
+            Terjemah
+          </label>
+        </div>
+
+        {data.post.content.map((wrapper, index) => (
+          <div key={index} className={`ui-card ${wrapper.class}`}>
+            <div className="ui-flex-column">
+              {tagFromArrObject(wrapper.content)}
+            </div>
+          </div>
+        ))}
       </div>
 
       <p>
         {data.tags.map((tag, index) => (
-          <>{' '}<Link to={`/tag/${tag.id}`}>{tag.title}</Link></>
+          <>{' '}<Link key={index} to={`/tag/${tag.id}`} className="ui-label">{tag.title}</Link></>
         ))}
       </p>
     </div >
