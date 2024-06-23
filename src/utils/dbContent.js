@@ -1,7 +1,6 @@
 import CONFIG from '../config';
-import { dbGetAllData, dbGetAllDataByIndex, dbGetData } from './db';
+import { dbGetAllData, dbGetAllDataByIndex, dbGetData, searchData } from './db';
 import { sortData, filterStatus, paginateData } from './dataHelper';
-
 
 const getAllCategories = async () => {
   let categories = await dbGetAllData('categories');
@@ -63,11 +62,35 @@ const getPostByCompositeId = async (compositeId) => {
   const sortedTags = sortData(filteredTags, 'priority', 'desc');
 
   return { post, categories: sortedCategories, tags: sortedTags };
-  // return { post, categories, tags };
+};
+
+const searchInStores = async (query) => {
+  const storeMap = {
+    posts: ['title', 'description', 'content'],
+    categories: ['title', 'description'],
+    tags: ['title', 'description'],
+  };
+
+  const results = {
+    posts: [],
+    categories: [],
+    tags: [],
+  };
+
+  const searchResults = await searchData(query, storeMap);
+
+  for (const { storeName, record } of searchResults) {
+    if (record.status === 1) {
+      results[storeName].push(record);
+    }
+  }
+
+  return results;
 };
 
 export {
   getCategoryById, getAllCategories, getAllPostsByCategory, getPostsByCategoryForPage,
   getTagById, getAllTags, getAllPostsByTag,
-  getPostByCompositeId
+  getPostByCompositeId,
+  searchInStores
 };

@@ -17,6 +17,10 @@
   --base-gap-lg: var(--unit-800);
   --base-gap-xl: var(--unit-1600);
 
+  /* root app padding */
+  --root-vertical-gap: var(--base-gap);
+  --root-horizontal-gap: var(--base-gap);
+
   /* For width, height, margin, padding and flex-gap */
   --unit-0: 0rem;
   --unit-025: 0.0625rem;
@@ -192,12 +196,10 @@ ol {
 
 /* === Component: Flex - one dimension row or column */
 :root {
-  --flex-gap: var(--base-gap);
+  --flex-gap: var(--root-vertical-gap);
 }
 
 .ui-flex-column {
-  --flex-gap: var(--base-gap);
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -258,15 +260,21 @@ ol {
 
 .ui-card {
   position: relative;
+  display: flow-root;
   background: #fff;
+  padding: var(--root-vertical-gap) var(--root-horizontal-gap);
+  margin: 0 calc(var(--root-vertical-gap) * -1);
+}
+.ui-card:not(.ui-card-full) {
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
-
-  display: flow-root;
   padding: var(--card-padding) var(--card-padding);
+  margin: 0;
 }
 .ui-card-md {
   --card-padding: var(--base-gap-md);
+}
+.ui-card-full {
 }
 
 /* === Component: label */
@@ -336,7 +344,6 @@ ol {
 :root {
   --base-background: #e1ebd2;
   --base-background: #eef3e6;
-  /* --base-background: #fafcf7; */
 
   /* https://www.color-hex.com/color-palette/1036745 */
   --green-gradient: linear-gradient(145deg, #bfcfa8 10%, #3e713b 100%);
@@ -385,8 +392,7 @@ ol {
 .app-nav-main {
   color: var(--base-color-inverse);
   background: #628d0d;
-  padding: var(--base-gap-sm);
-  padding: calc(var(--base-gap-sm) / 3) var(--base-gap-sm);
+  padding: calc(var(--root-vertical-gap) / 4) var(--root-horizontal-gap);
   box-shadow: var(--shadow-sm);
 
   display: flex;
@@ -400,7 +406,7 @@ ol {
   }
 }
 .app-content {
-  padding: var(--base-gap-sm);
+  padding: var(--root-vertical-gap) var(--root-horizontal-gap);
   padding-bottom: var(--base-gap-xl);
   height: calc(100vh - 40px);
   overflow-y: auto;

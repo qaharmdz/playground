@@ -9,6 +9,7 @@ import Category from '../pages/Category';
 import Tag from '../pages/Tag';
 import Post from '../pages/Post';
 import PostAyat from '../pages/PostAyat';
+import Search from '../pages/Search';
 import Setting from '../pages/Setting';
 import NotFound from '../pages/NotFound';
 
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
       { path: 'tag/:tagId', element: <Tag /> },
       { path: 'post/:compositeId', element: <Post /> },
       { path: 'post/ayat/:compositeId', element: <PostAyat /> },
+      { path: 'search', element: <Search /> },
       { path: 'setting', element: <Setting /> },
     ],
   },

@@ -1,6 +1,8 @@
 import { openDB } from 'idb';
 import CONFIG from '../config';
 
+import { fuzzySearch } from './dataSearch';
+
 const dbInitSchema = async (db) => {
   const storeNames = db.objectStoreNames;
 
@@ -58,6 +60,36 @@ const dbSetData = async (storeName, data) => {
   await tx.done;
 };
 
+const searchData = async (query, storeMap) => {
+  const db = await dbGetConnection();
+  const results = [];
+
+  for (const storeName of Object.keys(storeMap)) {
+    const tx = db.transaction(storeName, 'readonly');
+    const store = tx.store;
+    let cursor = await store.openCursor();
+
+    while (cursor) {
+      const record = cursor.value;
+
+      for (const field of storeMap[storeName]) {
+        const matchScore = fuzzySearch(record[field], query);
+        if (matchScore > 0) {
+          results.push({ storeName, record, score: matchScore });
+          break;
+        }
+      }
+
+      cursor = await cursor.continue();
+    }
+  }
+
+  // Sort results by score in descending order
+  results.sort((a, b) => b.score - a.score);
+
+  return results;
+};
+
 const dbGetAllData = async (storeName) => {
   const db = await dbGetConnection();
   return db.getAll(storeName);
@@ -70,4 +102,8 @@ const dbGetAllDataByIndex = async (storeName, indexName, indexValue) => {
   return index.getAll(indexValue);
 };
 
-export { dbGetConnection, dbGetData, dbSetData, clearStore, dbGetAllData, dbGetAllDataByIndex };
+export {
+  dbGetConnection, clearStore,
+  dbGetData, dbSetData, searchData,
+  dbGetAllData, dbGetAllDataByIndex
+};

@@ -30,7 +30,10 @@ const Post = () => {
 
       <h1>{data.post.title}</h1>
 
-      <div className={`ui-flex-column ${showTerjemah ? 'ui-terjemah-show' : ''}`}>
+      <div className={`
+        ui-flex-column
+        ${data.post.setting?.terjemah && showTerjemah ? 'ui-terjemah-show' : ''}
+      `}>
         <div className={`ui-card`}>
           <div className="ui-flex-column">
             {tagFromArrObject(data.post.description)}
@@ -57,11 +60,13 @@ const Post = () => {
         ))}
       </div>
 
-      <p>
-        {data.tags.map((tag, index) => (
-          <>{' '}<Link key={index} to={`/tag/${tag.id}`} className="ui-label">{tag.title}</Link></>
-        ))}
-      </p>
+      {data.tags.length > 0 && (
+        <p>
+          {data.tags.map((tag, index) => (
+            <>{' '}<Link key={index} to={`/tag/${tag.id}`} className="ui-label">{tag.title}</Link></>
+          ))}
+        </p>
+      )}
     </div >
   )
 };

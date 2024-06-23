@@ -84,7 +84,7 @@ const App = () => {
           <div className="app-floatbar">
             <div className="app-floatbar-content">
               <NavLink to="/">Home</NavLink>
-              <div>Search</div>
+              <NavLink to="/search">Search</NavLink>
               {/* <div>Bookmarks</div> */}
               <NavLink to="/settings">Settings</NavLink>
             </div>
