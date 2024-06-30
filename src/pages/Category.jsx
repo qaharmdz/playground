@@ -22,8 +22,6 @@ const Category = () => {
       <div className="ui-breadcrumb">
         <Link to="/">Home</Link>
         {' / '}
-        Kategori
-        {' / '}
         {category.title}
       </div>
 

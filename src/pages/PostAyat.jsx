@@ -31,7 +31,7 @@ const Post = () => {
 
       <div className={`
         ui-flex-column
-        ${data.post.setting?.terjemah && showTerjemah ? 'ui-terjemah-show' : ''}
+        ${showTerjemah ? 'ui-terjemah-show' : ''}
       `}>
         <div className={`ui-card`}>
           <div className="ui-flex-column">
@@ -39,7 +39,7 @@ const Post = () => {
           </div>
         </div>
 
-        <div>
+        {data.post.setting?.optTerjemah && <div>
           <label>
             <input
               type="checkbox"
@@ -48,7 +48,7 @@ const Post = () => {
             />
             Terjemah
           </label>
-        </div>
+        </div>}
 
         {data.post.content.map((wrapper, index) => (
           <div key={index} className={`ui-card ${wrapper.class}`}>

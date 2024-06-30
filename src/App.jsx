@@ -86,7 +86,7 @@ const App = () => {
               <NavLink to="/">Home</NavLink>
               <NavLink to="/search">Search</NavLink>
               {/* <div>Bookmarks</div> */}
-              <NavLink to="/settings">Settings</NavLink>
+              <NavLink to="/setting">Setting</NavLink>
             </div>
           </div>
         </main>
