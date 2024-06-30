@@ -19,7 +19,13 @@ const Tag = () => {
 
   return (
     <div className="ui-flex-column">
-      <p>Tag #{tagId}</p>
+      <div className="ui-breadcrumb">
+        <Link to="/">Home</Link>
+        {' / '}
+        Tag
+        {' / '}
+        {tag.title}
+      </div>
 
       <h1>{tag.title}</h1>
 

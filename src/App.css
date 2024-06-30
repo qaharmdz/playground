@@ -9,10 +9,10 @@
   --base-color: #222;
   --base-color-inverse: #fff;
   --base-background: #fff;
-  --base-background-inverse: #222;
+  --base-background-inverse: #111;
 
   --base-gap-sm: var(--unit-250);
-  --base-gap: var(--unit-400);
+  --base-gap: var(--unit-350);
   --base-gap-md: var(--unit-600);
   --base-gap-lg: var(--unit-800);
   --base-gap-xl: var(--unit-1600);
@@ -43,6 +43,10 @@
   --unit-2400: 6rem;
   --unit-2800: 7rem;
   --unit-3200: 8rem;
+
+  --color-link: rgba(0, 91, 211, 1);
+  --color-link-hover: rgba(0, 66, 153, 1);
+  --color-link-active: rgba(0, 46, 106, 1);
 
   --border-radius-0: 0rem;
   --border-radius-sm: var(--unit-150);
@@ -165,17 +169,6 @@ h6 {
   line-height: var(--base-line-height);
 }
 
-p,
-ul,
-ol,
-dl,
-pre,
-address,
-fieldset,
-figure {
-  /* margin: 0 0 calc(var(--base-gap) * 0.82) 0; */
-}
-
 * + p,
 * + ul,
 * + ol,
@@ -184,12 +177,23 @@ figure {
 * + address,
 * + fieldset,
 * + figure {
-  margin-top: calc(var(--base-gap) * 0.82);
+  margin-top: calc(var(--base-gap) * 0.5);
 }
 
 ul,
 ol {
   padding-left: var(--base-gap);
+}
+a {
+  text-decoration: none;
+  color: var(--color-link);
+}
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+a:active {
+  color: var(--color-link-active);
 }
 
 /* ======================== UI Reusable Style ======================== */
@@ -222,6 +226,7 @@ ol {
 }
 
 .ui-grid {
+  /* Fixed nested ui-gap-* */
   --grid-gap: var(--base-gap);
 
   display: grid;
@@ -290,6 +295,13 @@ ol {
   box-shadow: var(--shadow-sm);
 }
 
+/* === Component: breadcrumb */
+.ui-breadcrumb {
+  font-size: calc(var(--base-font-size) * 0.82);
+  line-height: calc(var(--base-line-height) * 0.82);
+  margin-bottom: 5px;
+}
+
 /* === Utilities */
 .ui-arabic {
   direction: rtl;
@@ -310,7 +322,7 @@ ol {
 }
 .ui-terjemah {
   font-style: italic;
-  font-size: calc(var(--base-font-size) * 0.88);
+  font-size: calc(var(--base-font-size) * 0.9);
   font-weight: 300;
   display: none;
 }
@@ -407,7 +419,7 @@ ol {
 }
 .app-content {
   padding: var(--root-vertical-gap) var(--root-horizontal-gap);
-  padding-bottom: var(--base-gap-xl);
+  padding-bottom: var(--unit-1200);
   height: calc(100vh - 40px);
   overflow-y: auto;
 
@@ -433,9 +445,9 @@ ol {
   }
 }
 .app-floatbar {
-  padding: var(--base-gap-sm);
+  /* padding: var(--base-gap-sm); */
   /* background: rgba(255, 255, 255, 0.5); */
-  border-radius: var(--border-radius-sm);
+  /* border-radius: var(--border-radius-sm); */
 
   position: absolute;
   bottom: 0;
@@ -445,8 +457,8 @@ ol {
   .app-floatbar-content {
     color: var(--base-color-inverse);
     background: var(--base-background-inverse);
-    height: 40px;
-    border-radius: var(--border-radius-sm);
+    height: 42px;
+    /* border-radius: var(--border-radius-sm); */
 
     display: flex;
     flex-direction: row;

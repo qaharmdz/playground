@@ -17,7 +17,7 @@ const Post = () => {
 
   return (
     <div className="ui-flex-column">
-      <p>
+      <div className="ui-breadcrumb">
         <Link to="/">Home</Link>
         {' / '}
         {data.categories.map((category, index) => (
@@ -25,8 +25,7 @@ const Post = () => {
         ))}
         {' / '}
         {data.post.title}
-      </p>
-
+      </div>
 
       <h1>{data.post.title}</h1>
 

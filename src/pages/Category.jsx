@@ -19,7 +19,13 @@ const Category = () => {
 
   return (
     <div className="ui-flex-column">
-      <p>Category #{categoryId}</p>
+      <div className="ui-breadcrumb">
+        <Link to="/">Home</Link>
+        {' / '}
+        Kategori
+        {' / '}
+        {category.title}
+      </div>
 
       <h1>{category.title}</h1>
 

@@ -6,6 +6,12 @@ const Post = () => {
 
   return (
     <div className="ui-flex-column">
+      <div className="ui-breadcrumb">
+        <Link to="/">Home</Link>
+        {' / '}
+        Posts #{compositeId}
+      </div>
+
       <p>Posts #{compositeId}</p>
       <p>Go back to the <Link to="/">home page</Link>.</p>
     </div >
