@@ -31,37 +31,38 @@
    ├── src/
    │ ├── elements/
    │ │ ├── common/
-   │ │ │ ├── LoadingIndicator.js
-   │ │ │ ├── SidebarNavigation.js
-   │ │ │ ├── Breadcrumb.js
-   │ │ │ └── Pagination.js
+   │ │ │ ├── LoadingIndicator.jsx
+   │ │ │ ├── SidebarNavigation.jsx
+   │ │ │ ├── Breadcrumb.jsx
+   │ │ │ └── Pagination.jsx
    │ │ └── pages/
-   │ │   ├── CategoryList.js
-   │ │   ├── PostFeatured.js
-   │ │   ├── PostLatest.js
-   │ │   ├── PostRelated.js
-   │ │   ├── PostTags.js
-   │ │   └── PostTags.js
+   │ │   ├── CategoryList.jsx
+   │ │   ├── PostFeatured.jsx
+   │ │   ├── PostLatest.jsx
+   │ │   ├── PostRelated.jsx
+   │ │   ├── PostTags.jsx
+   │ │   └── PostTags.jsx
    │ ├── contexts/
-   │ │ ├── DataContext.js
-   │ │ └── ConfigContext.js
+   │ │ ├── DataContext.jsx
+   │ │ └── ConfigContext.jsx
    │ ├── hooks/
-   │ │ └── useFetch.js
+   │ │ └── useFetch.jsx (?)
    │ ├── pages/
-   │ │ ├── ErrorPage.js
-   │ │ ├── HomePage.js
-   │ │ ├── CategoryPage.js
-   │ │ └── PostPage.js
+   │ │ ├── ErrorPage.jsx
+   │ │ ├── HomePage.jsx
+   │ │ ├── CategoryPage.jsx
+   │ │ └── PostPage.jsx
    │ ├── styles/
    │ │ └── main.css
    │ ├── utils/
-   │ │ ├── markdownParser.js
-   │ │ └── search.js
+   │ │ ├── markdownParser.jsx
+   │ │ └── search.jsx
    │ ├── config.js
-   │ ├── App.js
-   │ ├── Router.js
-   │ ├── ErrorBoundary.js
-   │ └── index.js
+   │ ├── App.css
+   │ ├── App.jsx
+   │ ├── main.js
+   │ ├── Router.jsx
+   │ └── ErrorBoundary.jsx
    │
    ├── .gitignore
    ├── package.json

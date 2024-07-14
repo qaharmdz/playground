@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "categoryId": 1,
+    "title": "QS Al-Baqarah 02:286",
+    "slug": "qs-al-baqarah-02-286",
+    "description": "Our Lord! Lay not on us a burden like that which You did lay on those before us...",
+    "content": "Content of the post",
+    "tags": [1],
+    "status": 1,
+    "order": 0
+  },
+  {
+    "id": 2,
+    "categoryId": 1,
+    "title": "QS Al-Imran 03:8",
+    "slug": "qs-al-imran-03-8",
+    "description": "Our Lord! Let not our hearts deviate after You have guided us...",
+    "content": "Content of the post",
+    "tags": [1],
+    "status": 1,
+    "order": 1
+  },
+  {
+    "id": 3,
+    "categoryId": 1,
+    "title": "QS Al-A'raf 07:23",
+    "slug": "qs-al-araf-07-23",
+    "description": "Our Lord! We have wronged ourselves...",
+    "content": "Content of the post",
+    "tags": [1],
+    "status": 1,
+    "order": 2
+  },
+  {
+    "id": 4,
+    "categoryId": 1,
+    "title": "QS Al-Mu'minun 23:109",
+    "slug": "qs-al-muminun-23-109",
+    "description": "Our Lord! We have believed, so forgive us and have mercy on us...",
+    "content": "Content of the post",
+    "tags": [1],
+    "status": 1,
+    "order": 3
+  }
+]

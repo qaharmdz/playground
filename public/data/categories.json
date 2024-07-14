@@ -1,0 +1,48 @@
+[
+  {
+    "id": 1,
+    "parent_id": 0,
+    "title": "Ayat Rabbana",
+    "slug": "ayat-rabbana",
+    "description": "Ayat-ayat doa mengandung kata Rabbana (Ya Tuhan kami)",
+    "content": "Daftar Ayat-ayat doa mengandung kata Rabbana (Ya Tuhan kami)",
+    "status": 1,
+    "order": 999
+  },
+  {
+    "id": 2,
+    "parent_id": 0,
+    "title": "Ayat Imam",
+    "slug": "ayat-imam",
+    "description": "Ayat-ayat pilihan yang sering dibaca oleh imam sholat",
+    "status": 1,
+    "order": 998
+  },
+  {
+    "id": 3,
+    "parent_id": 0,
+    "title": "Ayat Kultum",
+    "slug": "ayat-kultum",
+    "description": "Al-Quran materi kultum",
+    "status": 0,
+    "order": 997
+  },
+  {
+    "id": 4,
+    "parent_id": 0,
+    "title": "Hadist Populer",
+    "slug": "hadist-populer",
+    "description": "Kumpulan hadits populer",
+    "status": 0,
+    "order": 996
+  },
+  {
+    "id": 5,
+    "parent_id": 0,
+    "title": "Mutiara Nasihat",
+    "slug": "mutiara-nasihat",
+    "description": "",
+    "status": 0,
+    "order": 995
+  }
+]

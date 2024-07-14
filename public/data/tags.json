@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "title": "Al-Qur'an",
+    "slug": "quran",
+    "description": "",
+    "status": 0,
+    "order": 0
+  },
+  {
+    "id": 2,
+    "title": "Hadits",
+    "slug": "hadits",
+    "description": "",
+    "status": 0,
+    "order": 0
+  },
+  {
+    "id": 3,
+    "title": "Iman",
+    "slug": "iman",
+    "description": "",
+    "status": 1,
+    "order": 0
+  },
+  {
+    "id": 4,
+    "title": "Shalat",
+    "slug": "shalat",
+    "description": "",
+    "status": 1,
+    "order": 0
+  },
+  {
+    "id": 5,
+    "title": "Asmaul Husna",
+    "slug": "asmaul-husna",
+    "description": "",
+    "status": 1,
+    "order": 0
+  }
+]
