@@ -204,6 +204,9 @@ a:active {
 }
 
 .ui-flex-column {
+  /* Fixed nested ui-gap-* */
+  --flex-gap: var(--root-vertical-gap);
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -214,9 +217,13 @@ a:active {
   margin-bottom: 0;
 }
 .ui-flex-row {
+  /* Fixed nested ui-gap-* */
+  --flex-gap: var(--root-vertical-gap);
+
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: flex-start;
   gap: var(--flex-gap);
 }
 
@@ -300,6 +307,19 @@ a:active {
   font-size: calc(var(--base-font-size) * 0.82);
   line-height: calc(var(--base-line-height) * 0.82);
   margin-bottom: 5px;
+}
+
+/* === Component: form */
+
+.ui-form-field {
+  /* Fixed nested ui-gap-* */
+  --flex-gap: var(--root-vertical-gap);
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--flex-gap);
 }
 
 /* === Utilities */

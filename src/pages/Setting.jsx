@@ -1,11 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { useGetData } from '../utils/dataHelper';
+import { userGetAllSettings, userSetSetting } from '../utils/dbUser';
+
 const Setting = () => {
+
+  const { data: setting, loading: loading, error: error } = useGetData(userGetAllSettings);
+  console.log('sertting', setting, loading, error);
+
+  if (loading) {
+    return <p>Loading..</p>
+  }
+
   return (
-    <div>
-      <h1>Settings</h1>
-      <p>Go back to the <Link to="/">home page</Link>.</p>
+    <div className="ui-flex-column">
+      <div className="ui-breadcrumb">
+        <Link to="/">Home</Link>
+        {' / '}
+        Setting
+      </div>
+
+      <h1>Setting</h1>
+
+      <div className={`ui-card`}>
+        <div className="ui-flex-column">
+          <div className="ui-form-field">
+            <div>Latin font size</div>
+            <div>input</div>
+          </div>
+          <div className="ui-form-field">
+            <div>Arabic font size</div>
+            <div>input</div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 };
