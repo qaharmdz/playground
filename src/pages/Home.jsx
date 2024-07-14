@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import { DataContext } from '../contexts/DataContext';
 import { ConfigContext } from '../contexts/ConfigContext';
 
@@ -6,8 +8,16 @@ const Home = () => {
   const { config } = useContext(ConfigContext);
   const { data, loading, error } = useContext(DataContext);
 
-  console.log(config);
-  console.log(data, loading, error);
+  // console.log(config);
+  // console.log(data, loading, error);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <div className="homepage">
@@ -22,7 +32,9 @@ const Home = () => {
             {data.posts
               .filter(post => post.categoryId === category.id)
               .map(post => (
-                <li key={post.id}>{post.title}</li>
+                <li key={post.id}>
+                  <Link to={`/post/${post.slug}`}>{post.title}</Link>
+                </li>
               ))}
           </ul>
         </div>
