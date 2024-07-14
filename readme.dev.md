@@ -8,7 +8,6 @@
   - react: Core library for building the user interface.
   - react-dom: DOM-specific methods for React.
   - react-router-dom: For handling routing within the application.
-  - zustand: For managing global state.
   - axios: For making HTTP requests (optional if fetch is preferred).
   - fuse.js: For implementing search functionality.
   - react-markdown: For rendering markdown content with HTML support.
@@ -30,12 +29,7 @@
    │ └── service-worker.js
    │
    ├── src/
-   │ ├── components/
-   │ │ ├── CategoryList.js
-   │ │ ├── PostList.js
-   │ │ ├── FullPost.js
-   │ │ └── SplashScreen.js
-   │ ├── components/
+   │ ├── elements/
    │ │ ├── common/
    │ │ │ ├── LoadingIndicator.js
    │ │ │ ├── SidebarNavigation.js
@@ -108,26 +102,23 @@
 }
 ```
 
-4. Service Worker for PWA
+4. Data Structure
 
-- Registration: Register the service worker to handle caching and updates.
-- Offline Support: Implement caching strategies to serve content when the user is offline.
-- Lifecycle Management: Handle installation, activation, and fetch events to manage cache and serve resources efficiently.
-- Update Notifications: Implement logic to check for updates and notify users to refresh the app.
-- Splash Screen for initial loading and Loading Screens during data fetching to prevent interruptions and enhance user experience. This can be a simple overlay that indicates data is being loaded or updated.
+- Categories: Store categories in a JSON file (categories.json) with each category having a unique id, unique slug and name.
+- Tags: Store tags in a JSON file (tags.json) with each tag having a unique id, unique slug and name.
+- Posts: Store posts in a JSON file (posts.json) with each post having a composite ID (categoryId and postId), unique slug, title, description (markdown allowing HTML), content (markdown allowing HTML), and tags (array of tag IDs).
 
 5. Fetching Data
 
 - Consistency: Use fetch API to load local JSON files for posts, categories, and tags, ensuring a consistent approach for future scalability.
 - Handling Updates: Implement logic in the service worker to check and apply updates to cached data and notify users of new content.
 
-6. Data Structure
+8. Handling HTML and Markdown Content
 
-- Categories: Store categories in a JSON file (categories.json) with each category having a unique id, unique slug and name.
-- Tags: Store tags in a JSON file (tags.json) with each tag having a unique id, unique slug and name.
-- Posts: Store posts in a JSON file (posts.json) with each post having a composite ID (categoryId and postId), unique slug, title, description (markdown allowing HTML), content (markdown allowing HTML), and tags (array of tag IDs).
+- Markdown Parser: Use a library like marked or react-markdown to parse markdown content, allowing HTML tags with classes and styles for granular control.
+- Sanitization: Use libraries like DOMPurify to sanitize HTML content in posts to prevent XSS attacks.
 
-7. Components
+6. Components
 
 - Splash Screen: Implement a splash screen that displays while the app initially loads to enhance user experience.
 - Home: Display category and tags list.
@@ -135,10 +126,13 @@
 - Post List: Display a list of posts filtered by category or tag.
 - Full Post Page: Render a full post with its title, content, and associated tags, ensuring content supports HTML and markdown with styling and classes.
 
-8. Handling HTML and Markdown Content
+7. Service Worker for PWA
 
-- Markdown Parser: Use a library like marked or react-markdown to parse markdown content, allowing HTML tags with classes and styles for granular control.
-- Sanitization: Use libraries like DOMPurify to sanitize HTML content in posts to prevent XSS attacks.
+- Registration: Register the service worker to handle caching and updates.
+- Offline Support: Implement caching strategies to serve content when the user is offline.
+- Lifecycle Management: Handle installation, activation, and fetch events to manage cache and serve resources efficiently.
+- Update Notifications: Implement logic to check for updates and notify users to refresh the app.
+- Splash Screen for initial loading and Loading Screens during data fetching to prevent interruptions and enhance user experience. This can be a simple overlay that indicates data is being loaded or updated.
 
 9. Search Capabilities
 
