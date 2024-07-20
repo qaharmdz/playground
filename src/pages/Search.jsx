@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import Fuse from 'fuse.js';
 import { DataContext } from '../contexts/DataContext';
 import { Link } from 'react-router-dom';
-import { removeDuplicates } from '../utils/dataHelper';
+import { removeNestedDuplicates } from '../utils/dataHelper';
 
 const Search = () => {
   const { data } = useContext(DataContext);
@@ -13,6 +13,7 @@ const Search = () => {
   const fuseOptions = {
     shouldSort: true,
     includeScore: true,
+    includeMatches: true,
     threshold: 0.3,
     keys: [
       { name: 'title', weight: 0.7 },
@@ -29,7 +30,7 @@ const Search = () => {
     if (query.length < 3) {
       setResults([]);
       return;
-    };
+    }
 
     const terms = query.trim().split(/\s+/);
 
@@ -38,7 +39,7 @@ const Search = () => {
       : { $and: terms.map((term) => ({ $or: fuseOptions.keys.map((key) => ({ [key.name]: term })) })) };
 
     const result = fuse.search(searchQuery);
-    const uniqueResults = removeDuplicates(result.map(({ item }) => item), 'slug');
+    const uniqueResults = removeNestedDuplicates(result, 'slug');
     setResults(uniqueResults);
   };
 
@@ -104,9 +105,18 @@ const Search = () => {
       <p>Minimum character: 3</p>
       {results && <p>Results: {results.length}</p>}
       <ul>
-        {results.map((post) => (
-          <li key={post.slug}>
-            <Link to={`/post/${post.slug}`}>{post.title}</Link>
+        {results.map(({ item, matches }) => (
+          <li key={item.slug}>
+            <Link to={`/post/${item.slug}`}>{item.title}</Link>
+            {matches && (
+              <ul>
+                {matches.map((match, index) => (
+                  <li key={index}>
+                    <strong>{match.key}:</strong> {match.value}
+                  </li>
+                ))}
+              </ul>
+            )}
           </li>
         ))}
       </ul>
