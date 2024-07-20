@@ -24,6 +24,8 @@ const Home = () => {
       <h1>Home Page</h1>
       <h2>{config.name}</h2>
       <p>{config.tagline}</p>
+      <Link to={`/search`}>Search</Link>
+
 
       {data.categories.map(category => (
         <div key={category.id}>

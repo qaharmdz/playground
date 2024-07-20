@@ -12,6 +12,18 @@ export const sortData = (data, key = 'order', order = 'asc') => {
   });
 };
 
+export const removeDuplicates = (arr, key) => {
+  const seen = new Set();
+  return arr.filter(item => {
+    const keyValue = item[key];
+    if (seen.has(keyValue)) {
+      return false;
+    }
+    seen.add(keyValue);
+    return true;
+  });
+};
+
 export const paginateData = (data, page = 1, limit = 10) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;

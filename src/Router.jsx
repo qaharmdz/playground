@@ -10,6 +10,7 @@ import Category from './pages/Category';
 import Tags from './pages/Tags';
 import Tag from './pages/Tag';
 import Post from './pages/Post';
+import Search from './pages/Search';
 import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: 'tags', element: <Tags /> },
       { path: 'tag/:slug', element: <Tag /> },
       { path: 'post/:slug', element: <Post /> },
+      { path: 'search', element: <Search /> },
     ],
   },
 ]);
