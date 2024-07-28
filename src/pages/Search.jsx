@@ -17,10 +17,10 @@ const Search = () => {
     threshold: 0.3,
     keys: [
       { name: 'title', weight: 0.7 },
-      { name: 'slug', weight: 0.5 },
-      { name: 'description', weight: 0.3 },
+      // { name: 'slug', weight: 0.5 },
+      { name: 'description', weight: 0.3 }, // TODO Change to teaser
       { name: 'content', weight: 0.2 },
-      { name: 'tags', weight: 0.1 },
+      // { name: 'tags', weight: 0.1 },
     ],
   };
 
@@ -40,6 +40,7 @@ const Search = () => {
 
     const result = fuse.search(searchQuery);
     const uniqueResults = removeNestedDuplicates(result, 'slug');
+    console.log(result);
     setResults(uniqueResults);
   };
 
