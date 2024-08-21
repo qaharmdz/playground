@@ -3,3 +3,5 @@
 .htaccess
 *.ini
 error_log
+
+quran-snippet/temp/*
