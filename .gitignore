@@ -1,3 +1,5 @@
 **/_dev/*
 .well-known
 .htaccess
+*.ini
+error_log
