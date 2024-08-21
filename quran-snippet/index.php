@@ -26,7 +26,7 @@ if (!empty($_GET['nocache'])) {
 ?>
 <head>
     <meta charset="UTF-8">
-    <title>Mushaf Snippet</title>
+    <title>Mushaf Snippet | Mdz PlayGround</title>
 
     <link rel="stylesheet" href="./style.css" media="all">
     <?php if ($font == 'scheherazade') { ?>

@@ -39,7 +39,7 @@ class MushafApi
             
 
             return json_decode($data, $arrayFormat);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             die('Unable to connect to the Al Quran Cloud API!');
         }
     }
