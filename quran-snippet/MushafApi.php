@@ -33,14 +33,10 @@ class MushafApi
     public function fetch($segments, $arrayFormat = false)
     {
         try {
-            // var_dump($this->apiURL . $segments);
-            $data = file_get_contents($this->apiURL . $segments, false, stream_context_create(array(
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                ),
-            )));
-            // var_dump($data);
+             $data = file_get_contents($this->apiURL . $segments);
+            // $this->dump($data);
+            
+            
 
             return json_decode($data, $arrayFormat);
         } catch (Exception $e) {
@@ -110,6 +106,7 @@ class MushafApi
         }
 
         if (!$response = $this->fetch('surah/' . $surah . '/' . $segments)) {
+            $this->dump($response);
             return $this->error('Error occured, please try again later!');
         }
         if ($response->code != 200) {
@@ -289,6 +286,20 @@ class MushafApi
                     unlink($file);
                 }
             }
+        }
+    }
+    
+    private function dump($vars, $title = '', $message = '', $debug = true) {
+        if ($debug) {
+            echo '<pre style="background:#f8f8f8;padding:20px;margin:20px 0;max-height:300px;overflow:auto;"><code>';
+            if ($title) {
+                echo '<h3>' . $title . '</h3>';
+            }
+            if ($message) {
+                echo '<p>' . $message . '</p>';
+            }
+            print_r($vars);
+            echo '</code></pre>';
         }
     }
 }

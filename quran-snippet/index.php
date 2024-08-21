@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <?php
-// require $_SERVER['DOCUMENT_ROOT'] . '/_dump/kint-052022.phar';
-// Kint\Renderer\RichRenderer::$folder = true; // Bottom float
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -15,8 +13,9 @@ $_GET = $mushaf->clean($_GET);
 $mushafSnippet = '2:1-10, 2:152-157, 2:183-186, 2:254-257, 2:284-286, 3:16-19, 3:133-136, 3:190-194, 23:1-11, 59:18-24';
 $default   = '2:1-10, 2:127-128, 2:152-153, 2:183, 2:186, 2:197, 2:208, 2:254, 2:256, 2:257, 2:261, 2:267-268, 2:284, 2:285, 3:8-9, 3:19, 3:133-134, 3:190-191, 3:192-194, 3:200, 4:59, 5:27, 6:160-161, 6:162-163, 7:96, 11:114, 17:7, 33:70-71, 49:13, 51:56, 65:2-4';
 
+
 $surah     = !empty($_GET['surah']) ? $_GET['surah'] : $default;
-$font      = !empty($_GET['font']) ? $_GET['font'] : '';
+$font      = !empty($_GET['font']) ? $_GET['font'] : 'scheherazade';
 $mode      = !empty($_GET['mode']) ? $_GET['mode'] : '';
 $translate = !empty($_GET['translate']) ? 'show-translation' : '';
 $nocache   = !empty($_GET['nocache']) ? '1' : '';

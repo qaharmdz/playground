@@ -142,6 +142,14 @@ code {
     font-family: arial, sans-serif;
     font-size: 0.75em;
     /*color: #f53123;*/
+    
+    font-size: 2em;
+    line-height: 14px;
+    height: 12px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: -2px;
+    margin-top: 10px;
 }
 .translation {
     font-size: 14px;
