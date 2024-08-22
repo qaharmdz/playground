@@ -16,7 +16,8 @@ namespace mdzStack;
 
 class MushafApi
 {
-    private $apiURL     = 'https://api.alquran.cloud/';
+    // private $apiURL     = 'https://api.alquran.cloud/';
+    private $apiURL     = 'https://api.alquran.cloud/v1/';
     public $typeQuran   = 'quran-uthmani';
                         // quran-simple, quran-simple-clean, quran-simple-enhanced, quran-simple-min, quran-corpus-qd,
                         // quran-uthmani-min, quran-uthmani, quran-tajweed, quran-wordbyword, quran-kids
