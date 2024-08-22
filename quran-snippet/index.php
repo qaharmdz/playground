@@ -53,6 +53,7 @@ if (!empty($_GET['nocache'])) {
         <select name="font">
             <option value="" <?php echo !$font ? 'selected' : '' ?>>System</option>
             <option value="scheherazade" <?php echo $font == 'scheherazade' ? 'selected' : '' ?>>Scheherazade</option>
+            <option value="kitab" <?php echo $font == 'kitab' ? 'selected' : '' ?>>Kitab</option>
         </select>
         &nbsp;&nbsp;&nbsp;
         Mode:

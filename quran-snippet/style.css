@@ -1,191 +1,215 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "Kitab";
+  src: url("//cdn.alquran.cloud/public/fonts/Kitab-Regular.ttf");
+}
+
+.font-kitab {
+  font-family: "Kitab";
+}
+
+@font-face {
+  font-family: "Kitab Bold";
+  src: url("//cdn.alquran.cloud/public/fonts/Kitab-Bold.ttf");
+}
+
+.font-kitab-bold {
+  font-family: "Kitab Bold";
 }
 body {
-    font-family: arial, sans-serif;
-    color: #333;
-    font-size: 14px;
-    line-height: 1.6;
-    background: #fffdfb;
-    background: #f1f2f3;
-    margin: 0;
-    margin-bottom: 75px;
+  font-family: arial, sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.6;
+  background: #fffdfb;
+  background: #f1f2f3;
+  margin: 0;
+  margin-bottom: 75px;
 }
-p { margin: 0 0 5px; }
+p {
+  margin: 0 0 5px;
+}
 code {
-    font-family: Consolas, monaco, monospace;
-    font-size: .7rem;
-    color: #f53123;
-    padding: 2px 4px;
-    background: #f2f2f2;
-    white-space: nowrap;
+  font-family: Consolas, monaco, monospace;
+  font-size: 0.7rem;
+  color: #f53123;
+  padding: 2px 4px;
+  background: #f2f2f2;
+  white-space: nowrap;
 }
 
 .information {
-    font-size: 12px;
-    background: #fff;
-    padding: 5px 40px 8px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid rgba(0,0,0,0.2);
+  font-size: 12px;
+  background: #fff;
+  padding: 5px 40px 8px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .mushaf-filter {
-    font-size: 13px;
-    margin: 15px 0 5px;
+  font-size: 13px;
+  margin: 15px 0 5px;
 }
 
 .container {
-    width: 600px;
-    width: 575px;
-    margin: 0 auto;
+  width: 600px;
+  width: 575px;
+  margin: 0 auto;
 }
 .surah {
-    background: #fff;
-    padding: 20px 25px 25px 25px;
-    padding: 20px 24px 20px 23px;
-    padding: 20px 20px 20px 15px;
-    padding: 20px 15px 20px 15px;
-    border: 1px solid #888;
-    border: 4px double #888;
-    border-radius: 3px;
+  background: #fff;
+  padding: 20px 25px 25px 25px;
+  padding: 20px 24px 20px 23px;
+  padding: 20px 20px 20px 15px;
+  padding: 20px 15px 20px 15px;
+  border: 1px solid #888;
+  border: 4px double #888;
+  border-radius: 3px;
 }
 .surah:hover {
-    background-color: #fafff6; 
-    background-color: #fdfffb; 
+  background-color: #fafff6;
+  background-color: #fdfffb;
 }
 .surah + .surah {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .surahName {
-    color: #222;
-    font-size: 21px;
-    font-weight: normal;
-    text-align: center;
-    margin: 0;
-    margin-bottom: 25px;
+  color: #222;
+  font-size: 21px;
+  font-weight: normal;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 25px;
 }
 .ayah {
-    direction: rtl; 
-    color: #222;
-    font-family: 'Traditional Arabic', serif; 
-    font-size: 36px;
-    font-size: 38px;
-    line-height: 1.4;
+  direction: rtl;
+  color: #222;
+  font-family: "Traditional Arabic", serif;
+  font-size: 36px;
+  font-size: 38px;
+  line-height: 1.4;
 }
 .font-scheherazade .ayah {
-    font-family: 'Scheherazade New', 'Traditional Arabic', serif; 
-    font-size: 25.4px;
-    font-size: 26.4px;
-    font-size: 26px;
-    font-size: 27px;
-    line-height: 2;
-/*    letter-spacing: -.2px;*/
+  font-family: "Scheherazade New", "Traditional Arabic", serif;
+  font-size: 25.4px;
+  font-size: 26.4px;
+  font-size: 26px;
+  font-size: 27px;
+  line-height: 2;
+  /*    letter-spacing: -.2px;*/
+}
+.font-kitab .ayah {
+  font-family: "Kitab", "Traditional Arabic", serif;
+  font-size: 27px;
+  line-height: 2;
 }
 .ayahNumber {
-    font-size: 24px;
-    letter-spacing: -2px;
-    margin: 0 5px 0 10px;
-    display: inline-block;
+  font-size: 24px;
+  letter-spacing: -2px;
+  margin: 0 5px 0 10px;
+  display: inline-block;
 }
 .ayahNumber span {
-    font-size: 25px;
-    font-size: 18px;
-    padding: 0 1px;
+  font-size: 25px;
+  font-size: 18px;
+  padding: 0 1px;
 }
 
 .narrow .ayah {
-    font-size: 33px;
-    line-height: 1.35;
+  font-size: 33px;
+  line-height: 1.35;
 }
 .narrow .ayahNumber {
-    font-size: 20px;
+  font-size: 20px;
 }
 .narrow .ayahNumber span {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .xlarge {
-    width: 1300px;
-    padding: 10px;
+  width: 1300px;
+  padding: 10px;
 }
 .xlarge .surah {
-    padding: 2em;
-    border: .8em double #444;
-    border-radius: .6em;
+  padding: 2em;
+  border: 0.8em double #444;
+  border-radius: 0.6em;
 }
 .xlarge .surahName {
-    font-size: 4.2em;
-    margin-bottom: 25px;
+  font-size: 4.2em;
+  margin-bottom: 25px;
 }
 .xlarge .ayah {
-    font-size: 6em;
-    /*font-size: 6.2em;*/
-    font-size: 6.6em;
-    /*font-size: 7.2em;*/
-    letter-spacing: -1px;
+  font-size: 6em;
+  /*font-size: 6.2em;*/
+  font-size: 6.6em;
+  /*font-size: 7.2em;*/
+  letter-spacing: -1px;
 }
 .font-scheherazade.xlarge .ayah {
-    font-size: 4.4em;
-    letter-spacing: -.5px;
-    line-height: 2;
+  font-size: 4.4em;
+  letter-spacing: -0.5px;
+  line-height: 2;
 }
 .xlarge .ayahNumber {
-    font-size: 0.7em;
+  font-size: 0.7em;
 }
 .xlarge .ayahNumber span {
-    font-size: 1em;
-    letter-spacing: -5px;
-    padding: 0 5px 0 2px;
+  font-size: 1em;
+  letter-spacing: -5px;
+  padding: 0 5px 0 2px;
 }
 
 .sign {
-    font-family: arial, sans-serif;
-    font-size: 0.75em;
-    /*color: #f53123;*/
-    
-    font-size: 2em;
-    line-height: 14px;
-    height: 12px;
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: -2px;
-    margin-top: 10px;
+  font-family: arial, sans-serif;
+  font-size: 0.75em;
+  /*color: #f53123;*/
+
+  font-size: 2em;
+  line-height: 14px;
+  height: 12px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -2px;
+  margin-top: 10px;
 }
 .translation {
-    font-size: 14px;
-    line-height: 1.7;
-    padding: 0 15px;
-    margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  padding: 0 15px;
+  margin-top: 20px;
 
-    display: none;
-    visibility: hidden;
+  display: none;
+  visibility: hidden;
 }
 .xlarge .translation {
-    font-size: 2.8em;
-    line-height: 1.5;
+  font-size: 2.8em;
+  line-height: 1.5;
 }
 .show-translation .translation {
-    display: block;
-    visibility: visible;
+  display: block;
+  visibility: visible;
 }
 .error {
-    font-size: 16px;
-    color: #d00;
+  font-size: 16px;
+  color: #d00;
 }
 
 @media print {
-    .information {
-        display: none;
-    }
-    .surah {
-        padding: 0;
-        border: 0;
-    }
-    .surah:not(:last-child) {
-        page-break-inside:avoid;
-        page-break-after:always
-    }
-    .surah + .surah {
-        margin-top: 5px;
-    }
+  .information {
+    display: none;
+  }
+  .surah {
+    padding: 0;
+    border: 0;
+  }
+  .surah:not(:last-child) {
+    page-break-inside: avoid;
+    page-break-after: always;
+  }
+  .surah + .surah {
+    margin-top: 5px;
+  }
 }
