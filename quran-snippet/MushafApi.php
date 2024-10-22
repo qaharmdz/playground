@@ -19,25 +19,32 @@ class MushafApi
     // private $apiURL     = 'https://api.alquran.cloud/';
     private $apiURL     = 'https://api.alquran.cloud/v1/';
     public $typeQuran   = 'quran-uthmani';
-                        // quran-simple, quran-simple-clean, quran-simple-enhanced, quran-simple-min, quran-corpus-qd,
-                        // quran-uthmani-min, quran-uthmani, quran-tajweed, quran-wordbyword, quran-kids
+    // quran-simple, quran-simple-clean, quran-simple-enhanced, quran-simple-min, quran-corpus-qd,
+    // quran-uthmani-min, quran-uthmani, quran-tajweed, quran-wordbyword, quran-kids
     public $typeTrans   = 'id.indonesian';
-                        // id.indonesian, id.muntakhab, en.sahih, en.hilali
+    // id.indonesian, id.muntakhab, en.sahih, en.hilali
     public $cacheStatus = true;
     public $cacheExpire = 60 * 60 * 24 * 365; // 365 day
 
     private $collects   = [
-        '1', '2:1-7', '2:255-257', '2:284-286', '23:1-11',
-        '2:152-157', '2:183-186', '2:207-210', '3:1-9', '3:14-18', '3:26-28'
+        '1',
+        '2:1-7',
+        '2:255-257',
+        '2:284-286',
+        '23:1-11',
+        '2:152-157',
+        '2:183-186',
+        '2:207-210',
+        '3:1-9',
+        '3:14-18',
+        '3:26-28'
     ];
 
     public function fetch($segments, $arrayFormat = false)
     {
         try {
-             $data = file_get_contents($this->apiURL . $segments);
+            $data = file_get_contents($this->apiURL . $segments);
             // $this->dump($data);
-            
-            
 
             return json_decode($data, $arrayFormat);
         } catch (\Exception $e) {
@@ -79,6 +86,7 @@ class MushafApi
 
     /**
      * Fetch surah
+     * API: https://api.alquran.cloud/v1/surah/2/editions/quran-uthmani,id.indonesian?offset=253&limit=4
      *
      * @param  int   $surah
      * @param  mixed $ayah    Format: 255, 284-286
@@ -174,8 +182,8 @@ class MushafApi
 
     public function ayahNumber($num = 1)
     {
-        $digit  = ['0','1','2','3','4','5','6','7','8','9'];
-        $arabic = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+        $digit  = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        $arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
         $number = '<span class="ayahNumber">﴿';
         $number .= '<span>' . str_replace($digit, $arabic, $num) . '</span>';
@@ -289,10 +297,11 @@ class MushafApi
             }
         }
     }
-    
-    private function dump($vars, $title = '', $message = '', $debug = true) {
+
+    private function dump($vars, $title = '', $message = '', $debug = true)
+    {
         if ($debug) {
-            echo '<pre style="background:#f8f8f8;padding:20px;margin:20px 0;max-height:300px;overflow:auto;"><code>';
+            echo '<pre style="background:#f8f8f8;padding:20px;margin:20px 0;max-height:300px;overflow:auto;display:none;"><code>';
             if ($title) {
                 echo '<h3>' . $title . '</h3>';
             }
